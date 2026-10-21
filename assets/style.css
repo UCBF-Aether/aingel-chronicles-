@@ -53,3 +53,11 @@ body.paper .eyebrow{color:var(--bronze)}
 .src h4{margin-bottom:.2rem}
 .src-read{margin:.2rem 0 .6rem}
 .witness-sec{margin-top:1.6rem}
+.from-line{font-style:italic;color:var(--bronze);text-align:center;font-size:1.1rem;margin:.2rem 0}
+.section-link{text-align:center;margin:.3rem 0 .8rem}
+.story-art{width:100%;height:auto;border-radius:.4rem;display:block;margin-bottom:1rem}
+.closing-line{text-align:center;font-style:italic;color:var(--bronze);font-size:1.08rem;margin:1.6rem 0 .4rem}
+.story-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10.5rem,1fr));gap:.9rem;max-width:56rem;margin:1rem auto}
+.story-list a{display:block;text-decoration:none}
+.story-list img{width:100%;height:auto;border-radius:.35rem;display:block;margin-bottom:.35rem}
+.story-list span{display:block;text-align:center;font-size:1rem;line-height:1.35}
