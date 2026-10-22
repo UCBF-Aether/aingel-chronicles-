@@ -241,6 +241,50 @@ function unlockedTeachings(now) {
   for (var i = 1; i <= n; i++) out.push(i);
   return out;
 }
+// The bell peal is cut from a CC BY 3.0 recording; attribution is a
+// condition of the license, so the credit stands wherever the bell does.
+var BELL_CREDIT_HTML = 'Bells of M\u00fclheim an der Mosel \u00b7 recorded by '
+  + 'Helge Klaus Rieder \u00b7 '
+  + '<a href="https://creativecommons.org/licenses/by/3.0" rel="noopener">CC BY 3.0</a>';
+function bellCreditEl(){
+  var cred = document.createElement('p');
+  cred.className = 'bell-credit';
+  cred.innerHTML = BELL_CREDIT_HTML;
+  return cred;
+}
+// The peal travels the text-only road the book downloads travel:
+// base64 chunks + a manifest under assets/audio/bells/, reassembled
+// here into a Blob the player can ring. A failed assembly is not
+// cached, so a later tap can try the road again.
+var _bellUrlP = null;
+function bellPealUrl(base){
+  if(_bellUrlP) return _bellUrlP;
+  var p = fetch(base + 'manifest.json').then(function(r){ return r.json(); })
+    .then(function(m){
+      var jobs = [];
+      for(var i = 0; i < m.chunks; i++){
+        (function(i){
+          jobs.push(fetch(base + 'c' + ('0000' + i).slice(-4) + '.txt')
+            .then(function(r){ return r.text(); })
+            .then(function(t){
+              var bin = atob(t.replace(/\s+/g, ''));
+              var bytes = new Uint8Array(bin.length);
+              for(var j = 0; j < bin.length; j++)
+                bytes[j] = bin.charCodeAt(j);
+              return bytes;
+            }));
+        })(i);
+      }
+      return Promise.all(jobs).then(function(parts){
+        var blob = new Blob(parts, {type: 'audio/mpeg'});
+        if(blob.size !== m.size)
+          throw new Error('bell reassembly size mismatch');
+        return URL.createObjectURL(blob);
+      });
+    });
+  _bellUrlP = p.catch(function(e){ _bellUrlP = null; throw e; });
+  return _bellUrlP;
+}
 
 
 (function(){
@@ -291,6 +335,32 @@ window.WAU_r_ = function(count){
   }
   poll();
   setInterval(poll,45000);
+})();
+
+
+// Teaching bells: a click on the hub's Sabbath Teaching panel link — or,
+// on the Teachings index, on the link to the CURRENT week's teaching —
+// leaves a one-shot flag in sessionStorage. The teaching page itself
+// rings the peal on arrival; the click is the visitor's gesture, which
+// is what makes the sound lawful (no autoplay anywhere else).
+(function(){
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if(!a) return;
+    var set = false;
+    if(a.closest && a.closest('#teaching-panel')) set = true;
+    if(!set){
+      var list = document.getElementById('teaching-archive');
+      if(list && list.contains(a)){
+        var m = (a.getAttribute('href') || '').match(/^(\d+)\/$/);
+        if(m && typeof currentTeaching === 'function'){
+          var cur = currentTeaching(new Date());
+          if(cur && parseInt(m[1], 10) === cur) set = true;
+        }
+      }
+    }
+    if(set){ try{ sessionStorage.setItem('aingel_bell', '1'); }catch(_){} }
+  });
 })();
 </script>
 <footer class="site-footer">

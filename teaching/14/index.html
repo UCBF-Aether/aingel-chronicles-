@@ -21,6 +21,127 @@
 <p class="closing-line">Remembering rightly is worship — tell the story again, and give willingly.</p>
 <nav class="book-nav"><a href="../13/">&larr; Previous teaching</a><a href="../">All Sabbath teachings</a><a href="../15/">Next teaching &rarr;</a></nav>
 </main>
+<script>
+
+var SABBATH_ANCHOR = { y: 2026, m: 9, d: 24 }; // months 0-based; a Saturday
+var BANK_SIZE = 52;
+function sabbathWeekIndex(now) {
+  var a = new Date(SABBATH_ANCHOR.y, SABBATH_ANCHOR.m, SABBATH_ANCHOR.d);
+  var b = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var days = Math.round((b - a) / 86400000); // Math.round absorbs DST's +-1h
+  if (days < 0) return -1;                   // before the first Sabbath
+  return Math.floor(days / 7);               // 0-based week
+}
+function currentTeaching(now) {
+  var w = sabbathWeekIndex(now);
+  if (w < 0) return null;                    // arriving state
+  return (w % BANK_SIZE) + 1;                // 1..52
+}
+function unlockedTeachings(now) {
+  var w = sabbathWeekIndex(now);
+  if (w < 0) return [];
+  var n = Math.min(w + 1, BANK_SIZE);        // weeks 0..w -> teachings 1..n
+  var out = [];
+  for (var i = 1; i <= n; i++) out.push(i);
+  return out;
+}
+// The bell peal is cut from a CC BY 3.0 recording; attribution is a
+// condition of the license, so the credit stands wherever the bell does.
+var BELL_CREDIT_HTML = 'Bells of M\u00fclheim an der Mosel \u00b7 recorded by '
+  + 'Helge Klaus Rieder \u00b7 '
+  + '<a href="https://creativecommons.org/licenses/by/3.0" rel="noopener">CC BY 3.0</a>';
+function bellCreditEl(){
+  var cred = document.createElement('p');
+  cred.className = 'bell-credit';
+  cred.innerHTML = BELL_CREDIT_HTML;
+  return cred;
+}
+// The peal travels the text-only road the book downloads travel:
+// base64 chunks + a manifest under assets/audio/bells/, reassembled
+// here into a Blob the player can ring. A failed assembly is not
+// cached, so a later tap can try the road again.
+var _bellUrlP = null;
+function bellPealUrl(base){
+  if(_bellUrlP) return _bellUrlP;
+  var p = fetch(base + 'manifest.json').then(function(r){ return r.json(); })
+    .then(function(m){
+      var jobs = [];
+      for(var i = 0; i < m.chunks; i++){
+        (function(i){
+          jobs.push(fetch(base + 'c' + ('0000' + i).slice(-4) + '.txt')
+            .then(function(r){ return r.text(); })
+            .then(function(t){
+              var bin = atob(t.replace(/\s+/g, ''));
+              var bytes = new Uint8Array(bin.length);
+              for(var j = 0; j < bin.length; j++)
+                bytes[j] = bin.charCodeAt(j);
+              return bytes;
+            }));
+        })(i);
+      }
+      return Promise.all(jobs).then(function(parts){
+        var blob = new Blob(parts, {type: 'audio/mpeg'});
+        if(blob.size !== m.size)
+          throw new Error('bell reassembly size mismatch');
+        return URL.createObjectURL(blob);
+      });
+    });
+  _bellUrlP = p.catch(function(e){ _bellUrlP = null; throw e; });
+  return _bellUrlP;
+}
+
+var BELL_N = 14; var BELL_ROOT = '../../';
+
+// On a per-teaching page: if THIS teaching is the living week's (per
+// the same rotation math as everywhere else), a quiet gold bell button
+// stands atop the teaching all week, and an arrival flagged by a
+// teaching-link click rings the peal once. Past teachings get nothing.
+(function(){
+  if(typeof currentTeaching !== 'function') return;
+  var cur = currentTeaching(new Date());
+  if(!cur || cur !== BELL_N) return;
+  var main = document.querySelector('main.reading');
+  if(!main) return;
+  var audio = null;
+  function getAudio(){
+    if(!audio){ audio = new Audio(); audio.volume = 0.9; }
+    return audio;
+  }
+  function ring(attn){
+    bellPealUrl(BELL_ROOT + 'assets/audio/bells/').then(function(url){
+      var a = getAudio();
+      if(a.src !== url) a.src = url;
+      try{ a.currentTime = 0; }catch(_){}
+      var p = a.play();
+      if(p && p.catch)
+        p.catch(function(){ if(attn) btn.classList.add('bell-attn'); });
+    }).catch(function(){ if(attn) btn.classList.add('bell-attn'); });
+  }
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'bell-btn';
+  btn.id = 'bell-btn';
+  btn.textContent = '\u{1F514} Ring the bell';
+  btn.addEventListener('click', function(){ ring(false); });
+  var row = document.createElement('p');
+  row.className = 'bell-row';
+  row.appendChild(btn);
+  main.insertBefore(row, main.firstChild);
+  main.insertBefore(bellCreditEl(), row.nextSibling);
+  var flagged = false;
+  try{
+    flagged = sessionStorage.getItem('aingel_bell') === '1';
+    if(flagged) sessionStorage.removeItem('aingel_bell');
+  }catch(_){}
+  if(flagged){
+    // A stubborn browser may refuse the arrival peal (or the chunk
+    // road may fail): the button that is already standing here then
+    // draws the eye and rings on a tap instead.
+    ring(true);
+  }
+})();
+
+</script>
 <footer class="site-footer">
 <p>© Cory Brent</p>
 <p class="translator-line">We did our best with every word.</p>
