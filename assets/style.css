@@ -23,8 +23,8 @@ nav.crumbs{padding-top:1rem;font-size:.95rem}
 .presence-count.session{font-size:1.04rem}
 .presence-verse{font-style:italic;font-size:1.02rem;margin:.35rem 0 0;opacity:.82}
 .presence-verse .cite{font-style:normal;font-size:.82em;letter-spacing:.08em;white-space:nowrap}
-.presence-badge{opacity:.55;margin-left:.45rem}
-.presence-badge img{vertical-align:middle;border:0}
+.presence-badge{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;clip-path:inset(50%)}
+.presence-badge img{border:0}
 .alive-line{text-align:center;margin:.45rem 0 0;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:#b99a55;opacity:.85}
 .editions{display:grid;gap:1.5rem;margin-top:1rem}
 @media(min-width:44rem){.editions{grid-template-columns:1fr 1fr}}
@@ -106,7 +106,37 @@ body.paper .eyebrow{color:var(--bronze)}
 .look-grid figcaption{margin-top:.6rem;font-size:.98rem}
 .teaching-meta{font-style:italic;color:var(--bronze);text-align:center;margin:.1rem 0 1.1rem}
 .teaching-arrival{text-align:center;font-style:italic;border:1px solid #b39b5e;border-radius:.5rem;padding:.7rem 1rem}
+.bell-row{text-align:center;margin:.4rem 0 1.3rem}
+.bell-btn{font-family:Cinzel,serif;letter-spacing:.22em;text-transform:uppercase;font-size:.82rem;color:var(--gold);background:transparent;border:1px solid #b39b5e;border-radius:2rem;padding:.55rem 1.25rem;cursor:pointer}
+.bell-btn:hover{background:rgba(201,162,39,.14)}
+.bell-attn{animation:bellpulse 1.5s ease-in-out infinite}
+.bell-credit{font-size:.78rem;font-style:italic;color:var(--bronze);text-align:center;margin:.35rem 0 1.1rem}
+.bell-credit a{color:var(--bronze)}
+@keyframes bellpulse{0%,100%{box-shadow:0 0 0 0 rgba(201,162,39,0)}50%{box-shadow:0 0 0 .5rem rgba(201,162,39,.28)}}
 .teaching-archive{margin-top:2.6rem}
 .archive-list{list-style:none;padding:0}
 .archive-list li{margin:.55rem 0;padding-bottom:.55rem;border-bottom:1px solid rgba(140,109,59,.35)}
 .archive-list span{display:block;font-size:.93rem;opacity:.8}
+.track-summary{font-family:Cinzel,serif;letter-spacing:.08em;font-size:1.18rem;color:var(--bronze);margin:1.4rem 0 .2rem}
+.track-note{font-style:italic;opacity:.85;margin:.2rem 0 .8rem}
+.track-book-count{font-family:Cinzel,serif;letter-spacing:.06em;color:var(--gold);text-align:center;margin:.6rem auto .2rem}
+.chart-books li{flex-wrap:wrap}
+.bk-check{display:none;font-weight:700;color:#8a6d1f}
+.chart-row.book-complete .bk-check{display:inline}
+.chart-row.book-complete>a{color:#8a6d1f;font-weight:600}
+.chaps-btn{margin-left:.7rem;font-family:Cinzel,serif;font-size:.78rem;letter-spacing:.08em;background:transparent;border:1px solid #b39b5e;color:inherit;border-radius:2rem;padding:.32rem .85rem;cursor:pointer;min-height:2.3rem}
+.chaps-btn:hover{background:rgba(179,155,94,.16)}
+.chart-chaps{flex:0 0 100%;display:flex;flex-wrap:wrap;gap:.4rem;padding:.6rem 0 .35rem}
+.chart-chaps[hidden]{display:none}
+.chaps-hint{flex:0 0 100%;font-style:italic;font-size:.92rem;opacity:.8;margin:.1rem 0 .25rem}
+.chap-toggle{display:inline-flex;align-items:center;gap:.35rem;border:1px solid rgba(140,109,59,.5);border-radius:.4rem;padding:.42rem .55rem;cursor:pointer;font-size:.98rem}
+input.track-ch{width:1.3rem;height:1.3rem;accent-color:#8a6d1f;cursor:pointer;flex:none;margin:0}
+.chap-list li{border:1px solid #4a3512;border-radius:.4rem;display:flex;align-items:center;overflow:hidden}
+.chap-list a.chap-go{border:0;border-radius:0;border-left:1px solid #4a3512;margin-left:auto;display:flex;align-items:center;min-height:3rem}
+.chap-check{display:flex;align-items:center;gap:.55rem;padding:.8rem .7rem;min-height:3rem;cursor:pointer;flex:1}
+.music-card{border:1px solid rgba(140,109,59,.45);border-radius:.6rem;padding:1.15rem 1.25rem 1.05rem;margin:1.5rem 0;background:rgba(185,154,85,.06)}
+.music-title{font-family:Cinzel,serif;letter-spacing:.05em;font-size:1.32rem;margin:.1rem 0 .3rem;color:var(--bronze)}
+.music-story{margin:.2rem 0 .85rem}
+.music-card audio{width:100%;margin:.1rem 0 .65rem}
+.music-credit{font-size:.92rem;opacity:.85;margin:0}
+.music-credit a{color:inherit}

@@ -17,11 +17,101 @@
 </header>
 <main>
 <section class="book-intro"><p>Second Timothy is the most personal of Paul's letters in this collection, naming Paul as sender and written to Timothy from prison, with death near. An older apostle urges a younger, perhaps timid, coworker not to be ashamed of the gospel, to endure hardship like a soldier, to handle the word of truth rightly, and to preach in season and out. Paul's own course, he says, is finished, and he expects the crown of righteousness. The letter feels like a farewell passed hand to hand. In this edition the text is the King James Version of 1611, printed as received from the public domain. It belongs in this canon among the pastoral letters preserved by the Ethiopian Church, a testament of courage at the end of a life of service. Watch for the famous charge about all Scripture being given by inspiration of God.</p></section>
+<p class="track-book-count" data-book="2tim" data-total="4">0 of 4 chapters read</p>
 <ol class="chap-list">
-<li><a href="1.html">Chapter 1</a></li><li><a href="2.html">Chapter 2</a></li><li><a href="3.html">Chapter 3</a></li><li><a href="4.html">Chapter 4</a></li>
+<li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="2tim" data-ch="1"><span>Chapter 1</span></label><a class="chap-go" href="1.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="2tim" data-ch="2"><span>Chapter 2</span></label><a class="chap-go" href="2.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="2tim" data-ch="3"><span>Chapter 3</span></label><a class="chap-go" href="3.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="2tim" data-ch="4"><span>Chapter 4</span></label><a class="chap-go" href="4.html">Read</a></li>
 </ol>
 <p class="book-nav"><a class="btn btn-alt" href="../1tim/">Previous book: 1 Timothy</a><a class="btn btn-alt" href="../tit/">Next book: Titus</a></p>
 </main>
+<script>
+
+var READ_KEY = 'aingel-read-v1';
+var TRACKER_TOTAL = 2082;
+function readState() {
+  try {
+    var raw = localStorage.getItem(READ_KEY);
+    if (!raw) return {};
+    var o = JSON.parse(raw);
+    if (!o || typeof o !== 'object' || Object.prototype.toString.call(o) !== '[object Object]') return {};
+    return o;
+  } catch (e) { return {}; }
+}
+function saveReadState(st) {
+  try { localStorage.setItem(READ_KEY, JSON.stringify(st)); } catch (e) {}
+}
+function readTotal(st) { var n = 0; for (var k in st) { if (st[k]) n++; } return n; }
+function bookReadTotal(st, slug) {
+  var n = 0, pre = slug + ':';
+  for (var k in st) { if (st[k] && k.indexOf(pre) === 0) n++; }
+  return n;
+}
+function syncBookUI(slug) {
+  var st = readState();
+  var n = bookReadTotal(st, slug);
+  var boxes = document.querySelectorAll('input.track-ch[data-book="' + slug + '"]');
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].checked = !!st[slug + ':' + boxes[i].getAttribute('data-ch')];
+  }
+  var counts = document.querySelectorAll('.track-count[data-book="' + slug + '"]');
+  for (var j = 0; j < counts.length; j++) {
+    counts[j].textContent = n + ' / ' + counts[j].getAttribute('data-total');
+  }
+  var heads = document.querySelectorAll('.track-book-count[data-book="' + slug + '"]');
+  for (var h = 0; h < heads.length; h++) {
+    var total = parseInt(heads[h].getAttribute('data-total'), 10);
+    heads[h].textContent = n + ' of ' + total + ' chapter' + (total === 1 ? '' : 's') + ' read';
+  }
+  var rows = document.querySelectorAll('.chart-row[data-book="' + slug + '"]');
+  for (var r = 0; r < rows.length; r++) {
+    var rt = parseInt(rows[r].getAttribute('data-total'), 10);
+    if (n === rt && rt > 0) { rows[r].classList.add('book-complete'); }
+    else { rows[r].classList.remove('book-complete'); }
+  }
+  var total = readTotal(st);
+  var pct = Math.round(1000 * total / TRACKER_TOTAL) / 10;
+  var pctTxt = (pct % 1 === 0) ? String(Math.round(pct)) : pct.toFixed(1);
+  var sums = document.querySelectorAll('.track-summary');
+  for (var s2 = 0; s2 < sums.length; s2++) {
+    sums[s2].textContent = 'Your reading: ' + total + ' of 2,082 chapters \u00b7 ' + pctTxt + '%';
+  }
+}
+function refreshTracker() {
+  var slugs = {};
+  var els = document.querySelectorAll('[data-book]');
+  for (var i = 0; i < els.length; i++) { slugs[els[i].getAttribute('data-book')] = 1; }
+  for (var s in slugs) { syncBookUI(s); }
+}
+document.addEventListener('change', function (ev) {
+  var el = ev.target;
+  if (!el || !el.classList || !el.classList.contains('track-ch')) return;
+  var slug = el.getAttribute('data-book');
+  var st = readState();
+  var key = slug + ':' + el.getAttribute('data-ch');
+  if (el.checked) { st[key] = 1; } else { delete st[key]; }
+  saveReadState(st);
+  syncBookUI(slug);
+});
+document.addEventListener('click', function (ev) {
+  var b = ev.target;
+  while (b && !(b.classList && b.classList.contains('chaps-btn'))) { b = b.parentElement; }
+  if (!b) return;
+  var wrap = document.getElementById(b.getAttribute('aria-controls'));
+  if (!wrap) return;
+  if (wrap.hasAttribute('hidden')) {
+    wrap.removeAttribute('hidden');
+    b.setAttribute('aria-expanded', 'true');
+    b.textContent = 'Chapters \u25b4';
+  } else {
+    wrap.setAttribute('hidden', '');
+    b.setAttribute('aria-expanded', 'false');
+    b.textContent = 'Chapters \u25be';
+  }
+});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', refreshTracker);
+} else { refreshTracker(); }
+
+</script>
 <footer class="site-footer">
 <p>© Cory Brent</p>
 <p class="translator-line">We did our best with every word.</p>

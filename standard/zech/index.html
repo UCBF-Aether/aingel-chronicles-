@@ -17,11 +17,101 @@
 </header>
 <main>
 <section class="book-intro"><p>Zechariah is one of the longest of the Twelve Prophets, with 14 chapters, and the most vision-filled. Its first half is a series of night visions — horsemen, horns, a man with a measuring line, a high priest in clean garments, a flying scroll — all encouraging a returned people as they rebuild Jerusalem and the Temple. Its second half turns more searching and more hopeful, speaking of a coming humble king riding on a donkey, a pierced one who is mourned, and a day when the Lord will be king over all the earth.</p><p>In this edition Zechariah is printed from the King James Version of 1611, the public-domain text as received. It stands in this canon as one of the Twelve, and as Haggai's close companion in the rebuilding story. The Ethiopian canon keeps it in that prophetic company, where its images have fed Christian hope for centuries.</p><p>Watch for the donkey-riding king in chapter 9, and for how many of these visions the Gospels later echo.</p></section>
+<p class="track-book-count" data-book="zech" data-total="14">0 of 14 chapters read</p>
 <ol class="chap-list">
-<li><a href="1.html">Chapter 1</a></li><li><a href="2.html">Chapter 2</a></li><li><a href="3.html">Chapter 3</a></li><li><a href="4.html">Chapter 4</a></li><li><a href="5.html">Chapter 5</a></li><li><a href="6.html">Chapter 6</a></li><li><a href="7.html">Chapter 7</a></li><li><a href="8.html">Chapter 8</a></li><li><a href="9.html">Chapter 9</a></li><li><a href="10.html">Chapter 10</a></li><li><a href="11.html">Chapter 11</a></li><li><a href="12.html">Chapter 12</a></li><li><a href="13.html">Chapter 13</a></li><li><a href="14.html">Chapter 14</a></li>
+<li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="1"><span>Chapter 1</span></label><a class="chap-go" href="1.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="2"><span>Chapter 2</span></label><a class="chap-go" href="2.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="3"><span>Chapter 3</span></label><a class="chap-go" href="3.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="4"><span>Chapter 4</span></label><a class="chap-go" href="4.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="5"><span>Chapter 5</span></label><a class="chap-go" href="5.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="6"><span>Chapter 6</span></label><a class="chap-go" href="6.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="7"><span>Chapter 7</span></label><a class="chap-go" href="7.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="8"><span>Chapter 8</span></label><a class="chap-go" href="8.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="9"><span>Chapter 9</span></label><a class="chap-go" href="9.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="10"><span>Chapter 10</span></label><a class="chap-go" href="10.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="11"><span>Chapter 11</span></label><a class="chap-go" href="11.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="12"><span>Chapter 12</span></label><a class="chap-go" href="12.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="13"><span>Chapter 13</span></label><a class="chap-go" href="13.html">Read</a></li><li><label class="chap-check"><input type="checkbox" class="track-ch" data-book="zech" data-ch="14"><span>Chapter 14</span></label><a class="chap-go" href="14.html">Read</a></li>
 </ol>
 <p class="book-nav"><a class="btn btn-alt" href="../hag/">Previous book: Haggai</a><a class="btn btn-alt" href="../mal/">Next book: Malachi</a></p>
 </main>
+<script>
+
+var READ_KEY = 'aingel-read-v1';
+var TRACKER_TOTAL = 2082;
+function readState() {
+  try {
+    var raw = localStorage.getItem(READ_KEY);
+    if (!raw) return {};
+    var o = JSON.parse(raw);
+    if (!o || typeof o !== 'object' || Object.prototype.toString.call(o) !== '[object Object]') return {};
+    return o;
+  } catch (e) { return {}; }
+}
+function saveReadState(st) {
+  try { localStorage.setItem(READ_KEY, JSON.stringify(st)); } catch (e) {}
+}
+function readTotal(st) { var n = 0; for (var k in st) { if (st[k]) n++; } return n; }
+function bookReadTotal(st, slug) {
+  var n = 0, pre = slug + ':';
+  for (var k in st) { if (st[k] && k.indexOf(pre) === 0) n++; }
+  return n;
+}
+function syncBookUI(slug) {
+  var st = readState();
+  var n = bookReadTotal(st, slug);
+  var boxes = document.querySelectorAll('input.track-ch[data-book="' + slug + '"]');
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].checked = !!st[slug + ':' + boxes[i].getAttribute('data-ch')];
+  }
+  var counts = document.querySelectorAll('.track-count[data-book="' + slug + '"]');
+  for (var j = 0; j < counts.length; j++) {
+    counts[j].textContent = n + ' / ' + counts[j].getAttribute('data-total');
+  }
+  var heads = document.querySelectorAll('.track-book-count[data-book="' + slug + '"]');
+  for (var h = 0; h < heads.length; h++) {
+    var total = parseInt(heads[h].getAttribute('data-total'), 10);
+    heads[h].textContent = n + ' of ' + total + ' chapter' + (total === 1 ? '' : 's') + ' read';
+  }
+  var rows = document.querySelectorAll('.chart-row[data-book="' + slug + '"]');
+  for (var r = 0; r < rows.length; r++) {
+    var rt = parseInt(rows[r].getAttribute('data-total'), 10);
+    if (n === rt && rt > 0) { rows[r].classList.add('book-complete'); }
+    else { rows[r].classList.remove('book-complete'); }
+  }
+  var total = readTotal(st);
+  var pct = Math.round(1000 * total / TRACKER_TOTAL) / 10;
+  var pctTxt = (pct % 1 === 0) ? String(Math.round(pct)) : pct.toFixed(1);
+  var sums = document.querySelectorAll('.track-summary');
+  for (var s2 = 0; s2 < sums.length; s2++) {
+    sums[s2].textContent = 'Your reading: ' + total + ' of 2,082 chapters \u00b7 ' + pctTxt + '%';
+  }
+}
+function refreshTracker() {
+  var slugs = {};
+  var els = document.querySelectorAll('[data-book]');
+  for (var i = 0; i < els.length; i++) { slugs[els[i].getAttribute('data-book')] = 1; }
+  for (var s in slugs) { syncBookUI(s); }
+}
+document.addEventListener('change', function (ev) {
+  var el = ev.target;
+  if (!el || !el.classList || !el.classList.contains('track-ch')) return;
+  var slug = el.getAttribute('data-book');
+  var st = readState();
+  var key = slug + ':' + el.getAttribute('data-ch');
+  if (el.checked) { st[key] = 1; } else { delete st[key]; }
+  saveReadState(st);
+  syncBookUI(slug);
+});
+document.addEventListener('click', function (ev) {
+  var b = ev.target;
+  while (b && !(b.classList && b.classList.contains('chaps-btn'))) { b = b.parentElement; }
+  if (!b) return;
+  var wrap = document.getElementById(b.getAttribute('aria-controls'));
+  if (!wrap) return;
+  if (wrap.hasAttribute('hidden')) {
+    wrap.removeAttribute('hidden');
+    b.setAttribute('aria-expanded', 'true');
+    b.textContent = 'Chapters \u25b4';
+  } else {
+    wrap.setAttribute('hidden', '');
+    b.setAttribute('aria-expanded', 'false');
+    b.textContent = 'Chapters \u25be';
+  }
+});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', refreshTracker);
+} else { refreshTracker(); }
+
+</script>
 <footer class="site-footer">
 <p>© Cory Brent</p>
 <p class="translator-line">We did our best with every word.</p>
