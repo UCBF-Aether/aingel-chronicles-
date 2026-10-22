@@ -73,3 +73,6 @@ body.paper .eyebrow{color:var(--bronze)}
 .finder-eds{margin:.7rem 0 .2rem}
 .finder-eds label{margin:0 .7rem}
 .fin-msg{min-height:1.5rem;font-style:italic}
+.listen-bar{margin:.4rem 0 1rem;text-align:left}
+.listen-bar .btn{min-height:2.6rem;line-height:2.6rem;padding:0 1rem;font-size:.95rem;cursor:pointer;background:transparent}
+.listen-msg{font-style:italic;font-size:.95rem;margin-left:.35rem}
