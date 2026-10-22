@@ -17,6 +17,14 @@ nav.crumbs{padding-top:1rem;font-size:.95rem}
 .masthead-slogan{text-transform:uppercase;letter-spacing:.22em;color:#b99a55;margin:.9rem 0 0;font-size:.95rem}
 .masthead-verse{font-style:italic;font-size:1.05rem;margin:.35rem 0 0;opacity:.82}
 .masthead-verse .cite{font-style:normal;font-size:.82em;letter-spacing:.08em;white-space:nowrap}
+.presence{margin:.65rem 0 0}
+.presence[hidden],.presence-verse[hidden]{display:none}
+.presence-count{margin:0;text-transform:uppercase;letter-spacing:.22em;color:#b99a55;font-size:.92rem}
+.presence-count.session{font-size:1.04rem}
+.presence-verse{font-style:italic;font-size:1.02rem;margin:.35rem 0 0;opacity:.82}
+.presence-verse .cite{font-style:normal;font-size:.82em;letter-spacing:.08em;white-space:nowrap}
+.presence-badge{opacity:.55;margin-left:.45rem}
+.presence-badge img{vertical-align:middle;border:0}
 .alive-line{text-align:center;margin:.45rem 0 0;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:#b99a55;opacity:.85}
 .editions{display:grid;gap:1.5rem;margin-top:1rem}
 @media(min-width:44rem){.editions{grid-template-columns:1fr 1fr}}
