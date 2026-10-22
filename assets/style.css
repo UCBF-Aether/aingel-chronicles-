@@ -96,3 +96,9 @@ body.paper .eyebrow{color:var(--bronze)}
 .look-grid figure{margin:0;background:#241a0c;border:1px solid #4a3512;border-radius:.6rem;padding:.9rem}
 .look-grid img{width:100%;height:auto;border-radius:.3rem;display:block}
 .look-grid figcaption{margin-top:.6rem;font-size:.98rem}
+.teaching-meta{font-style:italic;color:var(--bronze);text-align:center;margin:.1rem 0 1.1rem}
+.teaching-arrival{text-align:center;font-style:italic;border:1px solid #b39b5e;border-radius:.5rem;padding:.7rem 1rem}
+.teaching-archive{margin-top:2.6rem}
+.archive-list{list-style:none;padding:0}
+.archive-list li{margin:.55rem 0;padding-bottom:.55rem;border-bottom:1px solid rgba(140,109,59,.35)}
+.archive-list span{display:block;font-size:.93rem;opacity:.8}
