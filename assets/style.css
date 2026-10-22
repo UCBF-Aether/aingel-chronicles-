@@ -62,3 +62,14 @@ body.paper .eyebrow{color:var(--bronze)}
 .story-list a{display:block;text-decoration:none}
 .story-list img{width:100%;height:auto;border-radius:.35rem;display:block;margin-bottom:.35rem}
 .story-list span{display:block;text-align:center;font-size:1rem;line-height:1.35}
+.stat-band{text-align:center;margin:.8rem auto 0;font-size:.95rem;letter-spacing:.22em;text-transform:uppercase;color:#b99a55}
+.gadget{max-width:44rem;margin:2.2rem auto;text-align:center;background:#241a0c;border:1px solid #4a3512;border-radius:.6rem;padding:1.2rem}
+.gadget h2{margin:.2rem 0 .4rem}
+.gadget-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:.8rem;color:#b99a55;margin:0 0 .4rem}
+.today-label{font-size:1.35rem;font-style:italic;margin:.2rem 0 .6rem}
+.tchap{margin:.35rem 0;font-size:1.05rem}
+.tonight-wrap{margin:.2rem 0 0}
+.finder-form input[type="text"]{width:min(26rem,90%);min-height:3rem;font-size:1.1rem;font-family:Lora,Georgia,serif;padding:0 .8rem;border-radius:.4rem;border:1px solid #4a3512;background:#171008;color:#eadfc6;text-align:center}
+.finder-eds{margin:.7rem 0 .2rem}
+.finder-eds label{margin:0 .7rem}
+.fin-msg{min-height:1.5rem;font-style:italic}
