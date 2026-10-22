@@ -73,3 +73,23 @@ body.paper .eyebrow{color:var(--bronze)}
 .finder-eds{margin:.7rem 0 .2rem}
 .finder-eds label{margin:0 .7rem}
 .fin-msg{min-height:1.5rem;font-style:italic}
+.book-intro{max-width:42rem;margin:1.4rem auto .4rem;font-size:1.06rem;line-height:1.75}
+.book-intro p{margin:.7rem 0}
+.md-table{border-collapse:collapse;width:100%;margin:1.2rem 0}
+.md-table th,.md-table td{border:1px solid #b39b5e;padding:.45rem .6rem;text-align:left;vertical-align:top}
+.md-table th{font-family:Cinzel,serif}
+.trail{margin:2.4rem 0}
+.trail .promise{font-style:italic;font-size:1.08rem;margin:.3rem 0 1rem}
+.path-stops{padding-left:1.3rem}
+.stop{margin:.6rem 0}
+.stop .why{display:block;font-style:italic;opacity:.85;font-size:.96rem}
+.chart-books{list-style:none;padding:0}
+.chart-books li{display:flex;gap:.5rem;align-items:baseline;padding:.35rem 0;border-bottom:1px solid rgba(140,109,59,.35)}
+.chart-books .bk-chaps{margin-left:auto;font-size:.9rem;opacity:.75;white-space:nowrap}
+.look-inside{max-width:62rem;margin:2.5rem auto;text-align:center;padding:0 1rem}
+.look-line{font-style:italic;font-size:1.12rem}
+.look-grid{display:grid;gap:1.2rem;margin-top:1.2rem}
+@media(min-width:44rem){.look-grid{grid-template-columns:1fr 1fr}}
+.look-grid figure{margin:0;background:#241a0c;border:1px solid #4a3512;border-radius:.6rem;padding:.9rem}
+.look-grid img{width:100%;height:auto;border-radius:.3rem;display:block}
+.look-grid figcaption{margin-top:.6rem;font-size:.98rem}
