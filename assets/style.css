@@ -147,3 +147,7 @@ input.track-ch{width:1.3rem;height:1.3rem;accent-color:#8a6d1f;cursor:pointer;fl
 .play-btn:disabled{opacity:.55;cursor:wait}
 .play-state{font-style:italic;opacity:.85;font-size:.95rem}
 .music-player audio{width:100%}
+.art-card{border:1px solid rgba(140,109,59,.45);border-radius:.6rem;padding:1.15rem 1.25rem 1.05rem;margin:1.5rem 0;background:rgba(185,154,85,.06)}
+.art-photo{width:100%;height:auto;border-radius:.4rem;display:block;margin:.15rem 0 .75rem}
+.art-date{margin:.05rem 0 .5rem;font-style:italic;opacity:.85}
+.empty-frame{border:1.5px dashed rgba(140,109,59,.65);border-radius:.6rem;padding:1.15rem 1.25rem 1.05rem;margin:1.5rem 0;background:rgba(185,154,85,.03)}
