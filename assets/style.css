@@ -30,6 +30,7 @@ nav.crumbs{padding-top:1rem;font-size:.95rem}
 @media(min-width:44rem){.editions{grid-template-columns:1fr 1fr}}
 .edition-card{background:#241a0c;border:1px solid #4a3512;border-radius:.6rem;padding:1.2rem;text-align:center}
 .edition-card img{max-width:100%;height:auto;border-radius:.3rem}
+.dl-count{margin:.45rem 0 0;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:#b99a55;opacity:.85}
 .btn{display:inline-block;min-height:3rem;line-height:3rem;padding:0 1.3rem;margin:.3rem;
  background:var(--gold);color:#171008 !important;font-weight:600;border-radius:.4rem;
  text-decoration:none;font-family:Cinzel,serif}
