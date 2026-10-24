@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concordance — Search Every Word — Aingel Chronicles</title>
+<style>
+body{background:#171208;color:#e8ddc4;font-family:Georgia,'Times New Roman',serif;margin:0;padding:0 1rem 3rem}
+main{max-width:44rem;margin:0 auto}
+h1{color:#c9a227;font-family:Georgia,serif;text-align:center;font-size:1.6rem;margin:1.2rem 0 .2rem}
+.sub{text-align:center;color:#b8a888;margin:0 0 1.2rem;font-style:italic}
+.search{display:flex;gap:.5rem;margin:1rem 0}
+.search input{flex:1;font-size:1.1rem;padding:.6rem;border:1px solid #c9a227;background:#241c11;color:#e8ddc4;border-radius:.3rem}
+.search button{font-size:1rem;padding:.6rem 1rem;background:#c9a227;color:#171208;border:0;border-radius:.3rem;cursor:pointer}
+.toggle{text-align:center;margin:.5rem 0 1rem}
+.toggle button{background:none;border:1px solid #c9a227;color:#c9a227;padding:.3rem .8rem;margin:0 .2rem;border-radius:.3rem;cursor:pointer}
+.toggle button.on{background:#c9a227;color:#171208}
+.note{color:#b8a888;font-size:.9rem;text-align:center}
+.result{border-top:1px solid #3a2f1d;padding:.7rem 0}
+.result .ref{color:#c9a227;text-decoration:none;font-weight:bold}
+.result .ref:hover{text-decoration:underline}
+mark{background:#c9a227;color:#171208;padding:0 .15rem;border-radius:.15rem}
+.count{font-size:1.1rem;margin:1rem 0}
+.err{color:#d98c8c}
+a{color:#c9a227}
+.letter-nav{text-align:center;margin:.5rem 0}
+.letter-nav a{color:#c9a227;text-decoration:none;margin:0 .25rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Concordance</h1>
+<p class="sub">Every word of the 81-book canon, in its every verse.</p>
+<div class="search">
+<input id="q" type="text" placeholder="Search one word — try shepherd, covenant, Nineveh…" autocomplete="off">
+<button id="go">Search</button>
+</div>
+<div class="toggle" role="group" aria-label="Edition">
+<button id="btn-std" class="on">Standard</button><button id="btn-mod">Modern</button>
+</div>
+<p class="note">One word at a time. Word forms are kept as written — <em>walketh</em> and <em>walks</em> are different words, as the editions write them. Phrases and topics live on the <a href="topical.html">Topical Concordance</a>. Every word is indexed; nothing is hidden as a stopword.</p>
+<div id="out"></div>
+</main>
+<script>
+const SITE = '../';
+let manifest = null, letterCache = {}, verseCache = {};
+let edition = 'std'; // 'std' | 'mod'
+const edFlag = {std: 1, mod: 2};
+async function loadManifest(){
+  if(!manifest){
+    manifest = await (await fetch('../assets/concordance/manifest.json')).json();
+  }
+  return manifest;
+}
+function letterOf(word){
+  const c = word[0] || '';
+  return (c >= 'a' && c <= 'z') ? c : 'other';
+}
+async function loadLetter(word){
+  const L = letterOf(word);
+  if(!letterCache[L]){
+    const r = await fetch('../assets/concordance/letters/' + L + '.json');
+    if(!r.ok) return null;
+    letterCache[L] = await r.json();
+  }
+  return letterCache[L];
+}
+async function loadVerses(slug){
+  const key = slug + '-' + edition;
+  if(!verseCache[key]){
+    const r = await fetch('../assets/concordance/verses/' + key + '.json');
+    if(!r.ok) return null;
+    verseCache[key] = await r.json();
+  }
+  return verseCache[key];
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function snippet(text, word){
+  const low = text.toLowerCase();
+  let i = low.indexOf(word);
+  if(i < 0){
+    // apostrophe or punctuation variants: fall back to first 110 chars
+    return esc(text.slice(0, 110)) + (text.length > 110 ? '…' : '');
+  }
+  let a = Math.max(0, i - 55), b = Math.min(text.length, i + word.length + 55);
+  // snap the window to word boundaries so snippets never start mid-word
+  if(a > 0){ const s = text.indexOf(' ', a); if(s >= 0 && s < i) a = s + 1; }
+  if(b < text.length){ const s = text.lastIndexOf(' ', b); if(s > i) b = s; }
+  let s = (a > 0 ? '…' : '') + text.slice(a, i) + '\u0001' + text.slice(i, i + word.length) + '\u0002' + text.slice(i + word.length, b) + (b < text.length ? '…' : '');
+  return esc(s).replace(/\u0001/g, '<mark>').replace(/\u0002/g, '</mark>');
+}
+function refLabel(bi, ch, v){
+  const name = manifest.book_names[manifest.books_order[bi]];
+  return v ? name + ' ' + ch + ':' + v : name + ' ' + ch;
+}
+function refHref(bi, ch){
+  const slug = manifest.books_order[bi];
+  const edDir = edition === 'std' ? 'standard' : 'modern';
+  return SITE + edDir + '/' + slug + '/' + ch + '.html';
+}
+async function search(){
+  const raw = document.getElementById('q').value || '';
+  const word = raw.toLowerCase().replace(/[^\p{L}']/gu, '');
+  const out = document.getElementById('out');
+  if(!word){ out.innerHTML = '<p class="err">Type one word to search.</p>'; return; }
+  if(raw.trim().split(/\s+/).length > 1){ out.innerHTML = '<p class="err">One word at a time — phrases live on the <a href="topical.html">Topical Concordance</a>.</p>'; return; }
+  out.innerHTML = '<p class="note">Searching…</p>';
+  await loadManifest();
+  const letters = await loadLetter(word);
+  if(!letters || !letters[word]){
+    out.innerHTML = '<p class="err">“' + esc(word) + '” does not occur in the canon.</p>';
+    return;
+  }
+  const flag = edFlag[edition];
+  const refs = letters[word].filter(r => (r[3] & flag) !== 0);
+  const otherFlag = edition === 'std' ? 2 : 1;
+  const otherCount = letters[word].filter(r => (r[3] & otherFlag) !== 0).length;
+  if(refs.length === 0){
+    const otherName = edition === 'std' ? 'Modern' : 'Standard';
+    out.innerHTML = '<p>“' + esc(word) + '” does not occur in the ' + (edition === 'std' ? 'Standard' : 'Modern') + ' wording, but occurs ' + otherCount + ' time' + (otherCount === 1 ? '' : 's') + ' in ' + otherName + '. Switch editions above to see them.</p>';
+    return;
+  }
+  const SHOWN = 200;
+  let html = '<p class="count">“' + esc(word) + '” — ' + refs.length + ' verse' + (refs.length === 1 ? '' : 's') + ' in ' + (edition === 'std' ? 'Standard' : 'Modern') + (refs.length > SHOWN ? ' (showing first ' + SHOWN + ')' : '') + '</p>';
+  const shown = refs.slice(0, SHOWN);
+  // group verse loads by book for fewer fetches
+  const byBook = {};
+  shown.forEach(r => { (byBook[r[0]] = byBook[r[0]] || []).push(r); });
+  for(const bi of Object.keys(byBook)){
+    const slug = manifest.books_order[bi];
+    const verses = await loadVerses(slug);
+    for(const r of byBook[bi]){
+      const ch = String(r[1]), v = String(r[2]);
+      let text = '';
+      if(verses && verses[ch] && verses[ch][v] !== undefined){
+        const units = Array.isArray(verses[ch][v]) ? verses[ch][v] : [verses[ch][v]];
+        text = units.find(t => t.toLowerCase().indexOf(word) >= 0) || units[0];
+      }
+      html += '<div class="result"><a class="ref" href="' + refHref(r[0], r[1]) + '">' + esc(refLabel(r[0], r[1], r[2] ? v : '')) + '</a><br>' + (text ? snippet(text, word) : '') + '</div>';
+    }
+  }
+  out.innerHTML = html;
+}
+document.getElementById('go').addEventListener('click', search);
+document.getElementById('q').addEventListener('keydown', e => { if(e.key === 'Enter') search(); });
+document.getElementById('btn-std').addEventListener('click', () => { edition = 'std'; document.getElementById('btn-std').className = 'on'; document.getElementById('btn-mod').className = ''; if(document.getElementById('q').value.trim()) search(); });
+document.getElementById('btn-mod').addEventListener('click', () => { edition = 'mod'; document.getElementById('btn-mod').className = 'on'; document.getElementById('btn-std').className = ''; if(document.getElementById('q').value.trim()) search(); });
+</script>
+</body>
+</html>
