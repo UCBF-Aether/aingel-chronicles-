@@ -1,0 +1,251 @@
+/* Scripture Explorer pilot — shared chrome.
+   Matches the live Aingel site: cream/parchment paper, dark ink,
+   muted-gold accents; Lora body, Cormorant display, Cinzel eyebrows/nav. */
+
+:root {
+  --gold: #c9a227;
+  --bronze: #8c6d3b;
+  --muted-gold: #b99a55;
+  --ink: #1a1512;
+  --paper: #f7f1e1;
+  --panel-paper: #fdfaf2;
+  --editorial-bg: #efe7d3;
+  --link: #7a5b12;
+  --link-hover: #5a4309;
+  --rule: rgba(140, 109, 59, 0.45);
+  --badge-doc-bg: #e8e3c8;
+  --badge-doc-border: #8c6d3b;
+  --badge-doc-text: #4a3a12;
+  --badge-int-bg: #e6e0ec;
+  --badge-int-border: #6b5a7e;
+  --badge-int-text: #3d2f4d;
+  --badge-unr-bg: #e9e2d6;
+  --badge-unr-border: #8a8578;
+  --badge-unr-text: #4a463c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-size: 1.13rem;
+  line-height: 1.8;
+}
+
+/* ---- Page layout: centered readable column ---- */
+main, header, footer, nav {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main { max-width: 44rem; padding-bottom: 2rem; }
+main.wide { max-width: 62rem; }
+
+/* ---- Header / eyebrow / title ---- */
+.masthead { text-align: center; padding: 3rem 1rem 1rem; }
+.eyebrow {
+  font-family: Cinzel, Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.8rem;
+  color: var(--bronze);
+  margin: 0 0 0.4rem;
+}
+.masthead h1, h1 {
+  font-family: Cormorant, Georgia, serif;
+  font-size: 2.9rem;
+  line-height: 1.15;
+  color: var(--bronze);
+  margin: 0.2rem 0 0.5rem;
+}
+h2, h3 {
+  font-family: Cormorant, Georgia, serif;
+  color: var(--bronze);
+  line-height: 1.25;
+}
+h2 { font-size: 2rem; margin: 2rem 0 0.5rem; }
+h3 { font-size: 1.6rem; margin: 1.5rem 0 0.4rem; }
+.subtitle { font-size: 1.25rem; font-style: italic; margin: 0.3rem 0; }
+.tag-line { font-style: italic; color: var(--bronze); }
+
+/* ---- Nav ---- */
+nav { padding-top: 1rem; }
+nav.crumbs, .chapter-nav {
+  font-family: Cinzel, Georgia, serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+.chapter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin: 2rem 0;
+  max-width: 44rem;
+}
+.chapter-nav a { text-decoration: none; }
+
+/* ---- Links ---- */
+a { color: var(--link); }
+a:hover, a:focus { color: var(--link-hover); }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* ---- Horizontal rule ---- */
+hr, .rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0;
+}
+
+/* ---- Scripture panel: DISTINCT from editorial panels ---- */
+.scripture-panel {
+  background: var(--panel-paper);
+  border: 2px solid var(--bronze);
+  border-radius: 0.6rem;
+  padding: 1.5rem 1.75rem;
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  line-height: 1.9;
+}
+.scripture-panel .eyebrow { color: var(--bronze); }
+.scripture-panel p { margin: 0.55rem 0; }
+.scripture-panel .verse { margin: 0.55rem 0; }
+.verse-num, .scripture-panel sup {
+  color: var(--bronze);
+  font-weight: 600;
+  font-size: 0.72em;
+  margin-right: 0.15em;
+  font-family: Lora, Georgia, serif;
+}
+
+/* ---- Editorial panels: clearly marked as explanation ---- */
+.editorial-panel,
+.panel-understand, .panel-trace, .panel-perspectives {
+  background: var(--editorial-bg);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--muted-gold);
+  border-radius: 0.6rem;
+  padding: 1.15rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.editorial-panel h2, .editorial-panel h3,
+.panel-understand h2, .panel-understand h3,
+.panel-trace h2, .panel-trace h3,
+.panel-perspectives h2, .panel-perspectives h3 { margin-top: 0.2rem; }
+.panel-eyebrow, .editorial-eyebrow {
+  font-family: Cinzel, Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.78rem;
+  color: var(--bronze);
+  margin: 0 0 0.4rem;
+}
+
+/* ---- Claim badges: label text always visible, never color-alone ---- */
+.badge {
+  display: inline-block;
+  font-family: Cinzel, Georgia, serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 2rem;
+  padding: 0.2rem 0.7rem;
+  margin-right: 0.4rem;
+  white-space: nowrap;
+}
+.badge-documented {
+  background: var(--badge-doc-bg);
+  border-color: var(--badge-doc-border);
+  color: var(--badge-doc-text);
+}
+.badge-interpreted {
+  background: var(--badge-int-bg);
+  border-color: var(--badge-int-border);
+  color: var(--badge-int-text);
+}
+.badge-unresolved {
+  background: var(--badge-unr-bg);
+  border-color: var(--badge-unr-border);
+  color: var(--badge-unr-text);
+}
+
+/* ---- Legend box ---- */
+.legend {
+  background: var(--panel-paper);
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  padding: 1.15rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.legend h2, .legend h3 { margin-top: 0.2rem; }
+.legend ul { padding-left: 1.3rem; }
+.legend li { margin: 0.5rem 0; }
+
+/* ---- Chapter cards (index page) ---- */
+.chapter-cards {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+@media (min-width: 44rem) {
+  .chapter-cards { grid-template-columns: 1fr 1fr; }
+}
+.chapter-card {
+  background: var(--panel-paper);
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  padding: 1.2rem 1.35rem;
+}
+.chapter-card h2 { margin-top: 0.2rem; font-size: 1.8rem; }
+.chapter-card h2 a { text-decoration: none; }
+.chapter-card p { margin: 0.6rem 0; }
+.chapter-card .not-yet { font-style: italic; font-size: 1.02rem; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block;
+  min-height: 3rem;
+  line-height: 3rem;
+  padding: 0 1.3rem;
+  margin: 0.3rem;
+  background: var(--gold);
+  color: #171008 !important;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  font-family: Cinzel, Georgia, serif;
+}
+.btn-alt {
+  background: transparent;
+  border: 1px solid var(--bronze);
+  color: var(--bronze) !important;
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  opacity: 0.85;
+  font-size: 1rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+}
+.site-footer p { margin: 0.4rem 0; }
+
+/* ---- Quoted verses OUTSIDE the Scripture panel: never class "verse" ----
+   Only the Scripture panel uses .verse, so automated verse-counting counts
+   Scripture verses and nothing else. Quoted verses in editorial panels use
+   .quote-verse: same serif, smaller, inset, unmistakably a quotation. */
+.quote-verse {
+  margin: 0.55rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--muted-gold);
+  font-size: 1.02rem;
+}
+.quote-verse .verse-num { color: var(--bronze); font-weight: 600; font-size: 0.72em; margin-right: 0.15em; }
