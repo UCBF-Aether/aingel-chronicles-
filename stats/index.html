@@ -86,7 +86,7 @@ function load() {
   });
   ['standard', 'modern', 'children'].forEach(function (k) {
     fetch('https://abacus.jasoncameron.dev/get/aingel-chronicles/' + k).then(function (r) { return r.json(); }).then(function (d) {
-      document.getElementById('given-' + k).textContent = d.value;
+      document.getElementById('given-' + k).textContent = (d && typeof d.value === 'number') ? d.value : 0;
     }).catch(function () {});
   });
 }
