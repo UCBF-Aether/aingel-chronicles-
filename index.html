@@ -23,9 +23,7 @@
   if (!el) return;
   function show() {
     fetch('https://aingel-stats-proxy-cpqr.vercel.app/api/stats').then(function (r) { return r.json(); }).then(function (d) {
-      var hub = null;
-      (d.pages || []).forEach(function (p) { if (p.path === '/aingel-chronicles-' || p.path === '/aingel-chronicles-/') hub = p; });
-      if (hub) el.textContent = hub.visitors + (hub.visitors === 1 ? ' visitor' : ' visitors');
+      if (typeof d.total_visitors === 'number') el.textContent = d.total_visitors + (d.total_visitors === 1 ? ' visitor' : ' visitors');
     }).catch(function () {});
   }
   show();
