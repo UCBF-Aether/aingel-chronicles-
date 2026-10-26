@@ -4,10 +4,94 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Statistics — Aingel Chronicles</title>
-<meta http-equiv="refresh" content="0; url=https://murkafool.goatcounter.com/">
-<link rel="canonical" href="https://murkafool.goatcounter.com/">
+<meta name="description" content="What readers are reading most on Aingel Chronicles — every page ranked, refreshed every minute.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+.stat-nav{max-width:44rem;margin:1rem auto 0;text-align:center;font-size:1.05rem}
+.stat-nav a{margin:0 .8rem}
+.stat-total{font-family:Cinzel,serif;font-size:3.2rem;line-height:1.1;color:var(--gold);margin:.4rem 0}
+.stat-note{font-size:.95rem;color:#b99a55;margin:.4rem 0 0}
+.rank-list{max-width:44rem;margin:2rem auto;text-align:left;padding:0;list-style:none}
+.rank-list li{display:flex;align-items:baseline;gap:1rem;padding:.9rem 0;border-bottom:1px solid #4a3512}
+.rank-num{font-family:Cinzel,serif;font-size:1.6rem;color:var(--gold);min-width:2.4rem;text-align:right}
+.rank-main{flex:1;min-width:0}
+.rank-title{font-size:1.25rem;line-height:1.3;overflow-wrap:break-word}
+.rank-path{font-size:.9rem;color:#b99a55;overflow-wrap:break-word}
+.rank-vis{font-family:Cinzel,serif;font-size:1.4rem;color:var(--gold);white-space:nowrap}
+.rank-vis small{display:block;font-family:Lora,Georgia,serif;font-size:.8rem;color:#b99a55;text-align:right}
+.given-row{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid #4a3512;font-size:1.15rem}
+.given-row:last-child{border-bottom:none}
+.given-row .n{font-family:Cinzel,serif;color:var(--gold)}
+#stat-status{text-align:center;color:#b99a55}
+</style>
 </head>
-<body>
-<p>Opening the full statistics&hellip; If you are not sent there, <a href="https://murkafool.goatcounter.com/">tap here for the GoatCounter dashboard</a>.</p>
+<body class="dark">
+<header class="masthead">
+<p class="masthead-eyebrow">Cory Brent</p>
+<h1>STATISTICS</h1>
+<p class="masthead-slogan">What readers are reading most.</p>
+</header>
+<main>
+<p class="stat-nav"><a href="../">← Back to the churchseum</a><a href="https://murkafool.goatcounter.com/" rel="noopener">Full dashboard</a></p>
+
+<section class="gadget">
+<p class="gadget-eyebrow">Visitors so far</p>
+<p class="stat-total" id="stat-total">…</p>
+<p class="stat-note">Counting began October 26, 2026. One person returning within eight hours counts once.</p>
+<p class="stat-note" id="stat-status">Gathering the numbers…</p>
+</section>
+
+<section class="gadget">
+<p class="gadget-eyebrow">Books given away</p>
+<div class="given-row"><span>Standard Bible</span><span class="n" id="given-standard">…</span></div>
+<div class="given-row"><span>Modern Bible</span><span class="n" id="given-modern">…</span></div>
+<div class="given-row"><span>Children&rsquo;s Bible</span><span class="n" id="given-children">…</span></div>
+</section>
+
+<ol class="rank-list" id="rank-list"></ol>
+<p class="stat-note" style="text-align:center">Every page ranked, refreshed every minute. The full ranking, with sparklines, lives on the <a href="https://murkafool.goatcounter.com/" rel="noopener">dashboard</a>.</p>
+</main>
+<script data-goatcounter="https://murkafool.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+var PROXY = 'https://aingel-stats-proxy-cpqr.vercel.app';
+function cleanPath(p) {
+  if (!p) return '';
+  if (p.indexOf('/aingel-chronicles-') === 0) p = p.slice('/aingel-chronicles-'.length);
+  if (p === '') p = '/';
+  return p;
+}
+function fmtTime(iso) {
+  try { return new Date(iso).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); }
+  catch (e) { return ''; }
+}
+function load() {
+  fetch(PROXY + '/api/stats').then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); }).then(function (d) {
+    document.getElementById('stat-total').textContent = d.total_visitors;
+    document.getElementById('stat-status').textContent = 'Updated ' + fmtTime(d.updated) + ' · refreshed every minute';
+    var list = document.getElementById('rank-list');
+    list.innerHTML = '';
+    d.pages.forEach(function (pg, i) {
+      var li = document.createElement('li');
+      var label = pg.title || cleanPath(pg.path);
+      li.innerHTML = '<span class="rank-num">' + (i + 1) + '</span>' +
+        '<span class="rank-main"><span class="rank-title"></span><br><span class="rank-path"></span></span>' +
+        '<span class="rank-vis">' + pg.visitors + '<small>visitor' + (pg.visitors === 1 ? '' : 's') + '</small></span>';
+      li.querySelector('.rank-title').textContent = label;
+      li.querySelector('.rank-path').textContent = cleanPath(pg.path);
+      list.appendChild(li);
+    });
+  }).catch(function () {
+    document.getElementById('stat-status').textContent = 'The live numbers aren\u2019t answering right now — the full dashboard still works.';
+  });
+  ['standard', 'modern', 'children'].forEach(function (k) {
+    fetch('https://abacus.jasoncameron.dev/get/aingel-chronicles/' + k).then(function (r) { return r.json(); }).then(function (d) {
+      document.getElementById('given-' + k).textContent = d.value;
+    }).catch(function () {});
+  });
+}
+load();
+setInterval(load, 60000);
+</script>
 </body>
 </html>
