@@ -140,6 +140,10 @@ input.track-ch{width:1.3rem;height:1.3rem;accent-color:#8a6d1f;cursor:pointer;fl
 .chap-list li{border:1px solid #4a3512;border-radius:.4rem;display:flex;align-items:center;overflow:hidden}
 .chap-list a.chap-go{border:0;border-radius:0;border-left:1px solid #4a3512;margin-left:auto;display:flex;align-items:center;min-height:3rem}
 .chap-check{display:flex;align-items:center;gap:.55rem;padding:.8rem .7rem;min-height:3rem;cursor:pointer;flex:1}
+.story-list .kids-check{display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.1rem 0 .3rem;min-height:0;cursor:pointer;font-size:.9rem}
+.story-list .kids-check input{accent-color:var(--gold)}
+.kids-read-line{margin:1.2rem 0 0}
+.kids-read-line .chap-check{justify-content:center}
 .music-card{border:1px solid rgba(140,109,59,.45);border-radius:.6rem;padding:1.15rem 1.25rem 1.05rem;margin:1.5rem 0;background:rgba(185,154,85,.06)}
 .music-title{font-family:Cinzel,serif;letter-spacing:.05em;font-size:1.32rem;margin:.1rem 0 .3rem;color:var(--bronze)}
 .music-story{margin:.2rem 0 .85rem}
