@@ -6,6 +6,14 @@
 <title>Places of the Book — Aingel Chronicles: The Complete 81-Book Ethiopian Canon in English</title>
 <meta name="description" content="Aingel Chronicles: The Complete 81-Book Ethiopian Canon in English — free to read and download. By Cory Brent.">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+#places-map { height: 480px; width: 100%; border: 1px solid #4a3512; background: #241a0c; z-index: 0; }
+#places-map img { max-width: none; }
+#places-map .map-fallback { padding: 1em; color: #b99a55; }
+@media (max-width: 600px) { #places-map { height: 360px; } }
+</style>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body class="paper">
@@ -22,6 +30,19 @@ photograph stands with its photographer and its license.</p>
 say so: at Axum the camera stands inside the new church of the same
 compound, and at Dura-Europos the place itself survives only in its
 painting.</p>
+<!-- THE MAP: HOW TO ADD A PLACE (nothing else to touch)
+     1. Copy any art-card block below and give it a new id.
+     2. On that section tag, set data-lat=".." data-lon=".." data-map="Place, Country".
+     3. Done. The script at the foot of this page reads every card's
+        data attributes and draws the pin itself. Cards sharing one
+        site share the SAME lat/lon and data-map, and share one pin
+        that lists all their cards. -->
+<section class="map-block">
+<h2>The Map</h2>
+<p>Every pin stands on a place that still stands. Click or tap a pin to jump to its photograph.</p>
+<div id="places-map"><p class="map-fallback">The map needs a connection to load its tiles. The photographs below stand on their own.</p></div>
+</section>
+
 <p>Wall One — Ethiopia, the Canon&rsquo;s Homeland: <a href="#lalibela-bete-giyorgis">Bete Giyorgis — Lalibela</a> &middot; <a href="#axum-st-mary-of-zion">St. Mary of Zion — Axum</a> &middot; <a href="#debre-damo-monastery">Debre Damo Monastery</a> &middot; <a href="#lake-tana-ura-kidane-mehret">Ura Kidane Mehret — Lake Tana</a> &middot; <a href="#axum-rome-stele">The Rome Stele — Axum</a> &middot; <a href="#lalibela-medhane-alem">Bete Medhane Alem — Lalibela</a> &middot; <a href="#lalibela-medhane-alem-shrine">Shrine inside Bete Medhane Alem</a> &middot; <a href="#abreha-atsbeha-adam-eve">Adam and Eve — Abreha and Atsbeha</a> &middot; <a href="#wukro-chirkos">Wukro Chirkos — Wukro, Tigray</a> &middot; <a href="#debre-berhan-selassie-wall">Debre Berhan Selassie — Wall and Tower</a> &middot; <a href="#narga-selassie-horsemen">Horsemen Mural — Narga Selassie, Lake Tana</a></p>
 <p>Wall Two — The Ground of Scripture: <a href="#sinai-st-catherines-monastery">St. Catherine&rsquo;s Monastery — Sinai</a> &middot; <a href="#bethlehem-church-of-the-nativity">Church of the Nativity — Bethlehem</a> &middot; <a href="#jerusalem-holy-sepulchre-entrance">Church of the Holy Sepulchre — Jerusalem</a> &middot; <a href="#qumran-cave">The Scroll Cave — Qumran</a> &middot; <a href="#capernaum-synagogue">The Synagogue at Capernaum</a> &middot; <a href="#madaba-jerusalem-panel">The Madaba Map — Jerusalem Panel</a> &middot; <a href="#nazareth-annunciation">The Basilica of the Annunciation — Nazareth</a> &middot; <a href="#mount-nebo-mosaics">The Memorial Church of Moses — Mount Nebo</a> &middot; <a href="#gethsemane-olive-trees">The Garden of Gethsemane — Ancient Olive Trees</a> &middot; <a href="#dominus-flevit">Dominus Flevit — The Lord Wept</a> &middot; <a href="#hebron-machpelah">The Cave of the Patriarchs — Machpelah, from the South</a></p>
 <p>Wall Three — The Apostolic Churches: <a href="#ephesus-library-of-celsus">The Library of Celsus — Ephesus</a> &middot; <a href="#patmos-cave-of-the-apocalypse">Cave of the Apocalypse — Patmos</a> &middot; <a href="#dura-europos-good-shepherd">The Good Shepherd — Dura-Europos</a> &middot; <a href="#antioch-st-peter">The Church of St. Peter — Antioch</a> &middot; <a href="#philippi-mosaic">Philippi — Floor Mosaic Naming Paul</a> &middot; <a href="#malta-catacombs">St. Paul's Catacombs — Rabat, Malta</a></p>
@@ -29,77 +50,77 @@ painting.</p>
 <p>Wall Five — The First Christian Nations: <a href="#etchmiadzin-cathedral">Etchmiadzin Cathedral</a> &middot; <a href="#svetitskhoveli-from-jvari">Svetitskhoveli Cathedral from Jvari</a> &middot; <a href="#hanging-church">The Hanging Church — Old Cairo</a></p>
 <h2>Wall One — Ethiopia, the Canon&rsquo;s Homeland</h2>
 <p>The churches of the church that kept all eighty-one books — carved down into living rock, set on a rope-cliff, gathered around a great lake.</p>
-<section class="art-card" id="lalibela-bete-giyorgis">
+<section class="art-card" id="lalibela-bete-giyorgis" data-lat="12.0317" data-lon="39.0411" data-map="Lalibela, Ethiopia">
 <h3 class="music-title">Bete Giyorgis — Lalibela</h3>
 <p class="art-date">12th–13th century &middot; Lalibela, Ethiopia</p>
 <img class="art-photo" data-place="lalibela-bete-giyorgis" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The cross-shaped rock-hewn church of Bete Giyorgis, seen from above in its excavated pit">
 <p class="music-story">Lalibela holds eleven monolithic rock-hewn churches, carved in the 12th–13th centuries under King Gebre Mesqel Lalibela of the Zagwe dynasty, who is said to have built the town as a &ldquo;New Jerusalem.&rdquo; Bete Giyorgis, dedicated to St. George, patron saint of Ethiopia, is the most finely built and best preserved of them — a church in the form of a cross, cut down into a single block of living rock. The site has been a UNESCO World Heritage Site since 1978 and remains in daily Ethiopian Orthodox worship: these churches still serve the church that kept the full 81-book canon, the Psalms and Gospels sung in Ge&rsquo;ez on ground Lalibela shaped after Jerusalem itself.</p>
 <p class="music-credit">Photograph by Bernard Gagnon &middot; <a href="https://commons.wikimedia.org/wiki/File:Bete_Giyorgis_03.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="axum-st-mary-of-zion">
+<section class="art-card" id="axum-st-mary-of-zion" data-lat="14.1317" data-lon="38.7197" data-map="Axum, Ethiopia">
 <h3 class="music-title">St. Mary of Zion — Axum</h3>
 <p class="art-date">The new church, 1950s &middot; Axum, Ethiopia</p>
 <img class="art-photo" data-place="axum-st-mary-of-zion" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Interior of the New Church of St. Mary of Zion, looking toward the curtained sanctuary">
 <p class="music-story">Axum was the capital of the Aksumite kingdom. King Ezana&rsquo;s conversion in the 4th century made it one of the first Christian kingdoms on earth; a church of St. Mary of Zion was built under Ezana, destroyed in the 1500s, and rebuilt. Ethiopian tradition holds that the Ark of the Covenant rests in the Chapel of the Tablet beside the old church, guarded by a single monk for life. The new church in this photograph — its interior, looking toward the curtained sanctuary — was built under Emperor Haile Selassie in the 1950s, within the same compound. The <em>Kebra Nagast</em>, one of the 81 books, tells how Menelik I, son of Solomon and the Queen of Sheba (1 Kings 10), brought the Ark to Axum; the Ark texts themselves are Exodus 25 and 37.</p>
 <p class="music-credit">Photograph by A. Davey &middot; <a href="https://commons.wikimedia.org/wiki/File:New_Church_of_St._Mary_of_Zion,_Axum,_Ethiopia_(2846160704).jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></p>
 </section>
-<section class="art-card" id="debre-damo-monastery">
+<section class="art-card" id="debre-damo-monastery" data-lat="14.382" data-lon="39.29" data-map="Debre Damo, Ethiopia">
 <h3 class="music-title">Debre Damo Monastery</h3>
 <p class="art-date">Founded 6th century &middot; Tigray, Ethiopia</p>
 <img class="art-photo" data-place="debre-damo-monastery" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="A painted monastery church on the edge of the Debre Damo plateau, the Tigray lowlands falling away behind">
 <p class="music-story">Debre Damo is a flat-topped mountain in Tigray — about a thousand metres by four hundred, at 2,216 metres up — hosting a monastery tradition claims was founded in the 6th century by Abuna Aregawi, one of the Nine Saints. It is reached only by a rope up a sheer cliff some fifteen metres high, admits men only, and keeps both a famed collection of manuscripts and the earliest existing church building in Ethiopia still in its original Aksumite style. Its monks guarded Ge&rsquo;ez manuscripts of the broad Ethiopian canon through the medieval centuries, and its founder belongs to the Nine Saints tradition that stands behind the Ge&rsquo;ez Bible itself. The photograph shows a monastery church on the plateau&rsquo;s edge.</p>
 <p class="music-credit">Photograph by Rod Waddington &middot; <a href="https://commons.wikimedia.org/wiki/File:Debre_Damo_monastery_(2017).jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="lake-tana-ura-kidane-mehret">
+<section class="art-card" id="lake-tana-ura-kidane-mehret" data-lat="11.665" data-lon="37.333" data-map="Lake Tana - Zege Peninsula, Ethiopia">
 <h3 class="music-title">Ura Kidane Mehret — Lake Tana</h3>
 <p class="art-date">14th century &middot; Zege Peninsula, Lake Tana, Ethiopia</p>
 <img class="art-photo" data-place="lake-tana-ura-kidane-mehret" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The round church of Ura Kidane Mehret under its conical thatched roof, among the trees">
 <p class="music-story">The convent of Ura Kidane Mehret was founded in the 14th century by the saint Betre Mariyam — &ldquo;Rod of Mary&rdquo; — and the present circular church dates from the 16th century. Its interior is covered with murals painted between roughly one hundred and two hundred and fifty years ago, the most significant by Alaqa Engida in the reign of Menelik II, and its treasury holds embroidered robes and the crowns of emperors Yohannes IV, Tewodros II and Tekle Giyorgis. Lake Tana&rsquo;s island and peninsula monasteries have kept church treasures and manuscripts in isolation for centuries — part of the monastic world through which books like Enoch and Jubilees, lost elsewhere, survived complete inside the 81-book canon.</p>
 <p class="music-credit">Photograph by Bernard Gagnon &middot; <a href="https://commons.wikimedia.org/wiki/File:Ura_Kidane_Mehret_Church_01.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="axum-rome-stele">
+<section class="art-card" id="axum-rome-stele" data-lat="14.1317" data-lon="38.7197" data-map="Axum, Ethiopia">
 <h3 class="music-title">The Rome Stele — Axum</h3>
 <p class="art-date">4th century &middot; Axum, Ethiopia</p>
 <img class="art-photo" data-place="axum-rome-stele" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The re-erected Aksumite stele at Axum, its carved false doors and window-tracery running up the shaft">
 <p class="music-story">The 24-metre re-erected Aksumite stele in the stele field at Axum, its carved false doors and window-tracery running up the shaft. Carved and erected in the fourth century by the Kingdom of Aksum, looted to Rome in 1937, and returned and re-erected at Axum in 2008. Captioned honestly: the stelae themselves are pre-Christian royal tombs, and this hangs here NOT as a Christian object but as the monument of the kingdom at its conversion under King Ezana (r. ca. 320s–360s) — the soil the <em>Kebra Nagast</em>, one of the 81 books, grows in: Menelik I, son of Solomon and the Queen of Sheba (1 Kings 10), bringing the Ark to Axum (Exodus 25, 37). Lalibela&rsquo;s churches deliberately echo these stelae&rsquo;s carved architecture.</p>
 <p class="music-credit">Photograph by Ondřej Žváček &middot; <a href="https://en.m.wikivoyage.org/wiki/File:Rome_Stele.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="lalibela-medhane-alem">
+<section class="art-card" id="lalibela-medhane-alem" data-lat="12.0317" data-lon="39.0411" data-map="Lalibela, Ethiopia">
 <h3 class="music-title">Bete Medhane Alem — Lalibela</h3>
 <p class="art-date">Rock-hewn &middot; Lalibela, Ethiopia</p>
 <img class="art-photo" data-place="lalibela-medhane-alem" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The largest monolithic rock-hewn church in the world, its colonnade in its excavated pit">
 <p class="music-story">The largest monolithic rock-hewn church in the world (33.5 × 23.5 m, over 11.5 m high), its temple-like colonnade of 34 exterior pillars, in its excavated pit. Northern group, Lalibela; thought by some to copy the original St. Mary of Zion at Axum; home of the Lalibela Cross (stolen 1997, recovered and returned 2001). Three symbolic empty graves inside are said to be prepared for Abraham, Isaac and Jacob. The Saviour of the World, in the New Jerusalem Lalibela built after Jerusalem — Genesis patriarchs honoured inside, Gospels sung in Ge'ez outside.</p>
 <p class="music-credit">Photograph by Giustino &middot; <a href="https://commons.wikimedia.org/wiki/File:Bet_Medhane_Alem_church_Lalibela.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></p>
 </section>
-<section class="art-card" id="lalibela-medhane-alem-shrine">
+<section class="art-card" id="lalibela-medhane-alem-shrine" data-lat="12.0317" data-lon="39.0411" data-map="Lalibela, Ethiopia">
 <h3 class="music-title">Shrine inside Bete Medhane Alem</h3>
 <p class="art-date">Lalibela, Ethiopia</p>
 <img class="art-photo" data-place="lalibela-medhane-alem-shrine" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The shrine inside Bete Medhane Alem: the Virgin and Child stand under a knitted orange mantle">
 <p class="music-story">A living shrine, not a ruin: the stand holding an image of the Virgin Mary with the infant Jesus under a knitted orange mantle, tin birds circling above painted metal cones, Ethiopian yellow-green-red everywhere. This is how the church is dressed for worship now, in the colours of Ethiopian Orthodox devotion. Mary and the infant Jesus (Luke 2; Matthew 2) — the devotional heart of the Ethiopian church, where Mary is venerated above all saints.</p>
 <p class="music-credit">Photograph by A. Davey &middot; <a href="https://commons.wikimedia.org/wiki/File:Detail,_Shrine_in_the_Church_of_Bet_Medhane_Alem,_Lalibela,_Ethiopia_(Best_Viewed_%22Large%22_or_%22Original%22)_(3199777380).jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></p>
 </section>
-<section class="art-card" id="abreha-atsbeha-adam-eve">
+<section class="art-card" id="abreha-atsbeha-adam-eve" data-lat="14.09293" data-lon="39.56546" data-map="Abreha Atsbeha, Ethiopia">
 <h3 class="music-title">Adam and Eve — Abreha and Atsbeha</h3>
 <p class="art-date">Tigray, Ethiopia</p>
 <img class="art-photo" data-place="abreha-atsbeha-adam-eve" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall painting of Adam and Eve inside Abreha and Atsbeha Church">
 <p class="music-story">Abreha and Atsbeha, ~15 km from Wukro, is among Tigray's earliest churches — tradition dates it to the 4th-century twin kings Abreha and Atsbeha (identified with Ezana and Sayzana), whose bodies are claimed to be entombed there; its murals, in Ge'ez-labelled programmes of saints' lives and biblical scenes, are among the finest in Tigray. Genesis 2–3, the Fall itself, painted where the congregation stands. Pairs with the Dura-Europos Adam-and-Eve fresco already on the museum's wall — the same scene, an Ethiopian millennium later.</p>
 <p class="music-credit">Photograph by Bernard Gagnon &middot; <a href="https://commons.wikimedia.org/wiki/File:Abreha_and_Atsbeha_Church_-_Adam_and_Eve_02.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, 2.5, 2.0, 1.0 (GFDL 1.2 also offered) — shared here under the same license.</p>
 </section>
-<section class="art-card" id="wukro-chirkos">
+<section class="art-card" id="wukro-chirkos" data-lat="13.78611" data-lon="39.60222" data-map="Wukro, Ethiopia">
 <h3 class="music-title">Wukro Chirkos — Wukro, Tigray</h3>
 <p class="art-date">4th century &middot; Wukro, Tigray</p>
 <img class="art-photo" data-place="wukro-chirkos" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The semi-monolithic church of Wukro Chirkos at the edge of Wukro town">
 <p class="music-story">The semi-monolithic church at the edge of Wukro town — side walls, front wall and roof fully freed from the rock, attached only at floor and back wall. Believed carved in the 4th century; rectangular carved columns of quartz-rich sandstone, arches, curved ceilings with carved decoration; an Aksumite-type inscribed sandstone slab found nearby supports the early date. The most accessible of all Tigray rock churches — 500 m from the main road. A 4th-century church of the Ezana generation — the conversion era made stone.</p>
 <p class="music-credit">Photograph by Bernard Gagnon &middot; <a href="https://commons.wikimedia.org/wiki/File:Wukro_Chirkos_02.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, 2.5, 2.0, 1.0 (GFDL 1.2 also offered) — shared here under the same license.</p>
 </section>
-<section class="art-card" id="debre-berhan-selassie-wall">
+<section class="art-card" id="debre-berhan-selassie-wall" data-lat="12.61248" data-lon="37.47999" data-map="Gondar, Ethiopia">
 <h3 class="music-title">Debre Berhan Selassie — Wall and Tower</h3>
 <p class="art-date">Late 17th century &middot; Gondar, Ethiopia</p>
 <img class="art-photo" data-place="debre-berhan-selassie-wall" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The stone wall and rounded tower of the Debre Berhan Selassie compound">
 <p class="music-story">Debre Berhan Selassie ("Trinity and Mountain of Light"), built in the late 17th century, is the church that survived Gondar's 1888 sacking — tradition says a swarm of bees, aided by the Archangel Michael with a flaming sword, turned the Dervishes from its doors. Inside, every wall and the ceiling are painted: the life of Christ, the Passion, and the famous ceiling of winged cherub faces. The Trinity (Matthew 28:19) and the angelic host (Revelation 4–5; Psalm 91:11) — the church whose ceiling is the choir of heaven. Honest scope note: this keeper is the exterior; the famous angel ceiling itself is not in this haul.</p>
 <p class="music-credit">Photograph by Bernard Gagnon &middot; <a href="https://commons.wikimedia.org/wiki/File:Church_of_Debra_Berhan_Selassie_-_Wall.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, 2.5, 2.0, 1.0 (GFDL 1.2 also offered) — shared here under the same license.</p>
 </section>
-<section class="art-card" id="narga-selassie-horsemen">
+<section class="art-card" id="narga-selassie-horsemen" data-lat="11.62" data-lon="37.41" data-map="Lake Tana - Dek Island, Ethiopia">
 <h3 class="music-title">Horsemen Mural — Narga Selassie, Lake Tana</h3>
 <p class="art-date">Late 18th century &middot; Dek Island, Lake Tana</p>
 <img class="art-photo" data-place="narga-selassie-horsemen" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Mural painting of horsemen, equestrian saints in the Gondarine manner, inside Narga Selassie">
@@ -108,77 +129,77 @@ painting.</p>
 </section>
 <h2>Wall Two — The Ground of Scripture</h2>
 <p>The ground the Scriptures themselves walk: the mountain of the Law, the town of the birth, the city of the empty tomb, and the cave that kept the scrolls — and the Galilee Jesus walked, the mountain Moses viewed from, and the map the whole canon walks on.</p>
-<section class="art-card" id="sinai-st-catherines-monastery">
+<section class="art-card" id="sinai-st-catherines-monastery" data-lat="28.5558" data-lon="33.9756" data-map="Saint Catherine's, Sinai, Egypt">
 <h3 class="music-title">St. Catherine&rsquo;s Monastery — Sinai</h3>
 <p class="art-date">Established AD 565 &middot; Sinai, Egypt</p>
 <img class="art-photo" data-place="sinai-st-catherines-monastery" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The fortified monastery of St. Catherine beneath the granite slopes of Mount Sinai">
 <p class="music-story">Founded under the Emperor Justinian I and established in AD 565 at the foot of Mount Sinai, on the ground tradition identifies with the Burning Bush, St. Catherine&rsquo;s is among the oldest continuously functioning Christian monasteries in the world, and its walled compound guards one of the great manuscript libraries of the ancient church. Exodus walks this ground: the Burning Bush (Exodus 3) and the Giving of the Law on the mountain above (Exodus 19–20).</p>
 <p class="music-credit">Photograph by Berthold Werner &middot; <a href="https://commons.wikimedia.org/wiki/File:Katharinenkloster_Sinai_BW_2.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="bethlehem-church-of-the-nativity">
+<section class="art-card" id="bethlehem-church-of-the-nativity" data-lat="31.70424" data-lon="35.20631" data-map="Bethlehem">
 <h3 class="music-title">Church of the Nativity — Bethlehem</h3>
 <p class="art-date">Dedicated 339, rebuilt under Justinian &middot; Bethlehem</p>
 <img class="art-photo" data-place="bethlehem-church-of-the-nativity" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Manger Square in front of the Church of the Nativity, Bethlehem">
 <p class="music-story">The basilica over the Grotto of the Nativity was commissioned by Constantine the Great after his mother Helena&rsquo;s visit of 325–326, likely built 330–333 and dedicated on 31 May 339. Destroyed by fire during the Samaritan revolts of the 6th century, it was rebuilt by the Emperor Justinian and stands basically unchanged since — the oldest major church in the Holy Land, and the grotto the oldest site continuously used for Christian worship. Here, in David&rsquo;s Bethlehem, the town Micah named (Micah 5:2), the Gospels place the birth of Jesus (Matthew 2; Luke 2).</p>
 <p class="music-credit">Photograph by Berthold Werner &middot; <a href="https://commons.wikimedia.org/wiki/File:Bethlehem_BW_2010-09-21_12-34-02.JPG">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="jerusalem-holy-sepulchre-entrance">
+<section class="art-card" id="jerusalem-holy-sepulchre-entrance" data-lat="31.7784" data-lon="35.2296" data-map="Jerusalem - Holy Sepulchre">
 <h3 class="music-title">Church of the Holy Sepulchre — Jerusalem</h3>
 <p class="art-date">Crusader church, rebuilt 1810 &middot; Jerusalem</p>
 <img class="art-photo" data-place="jerusalem-holy-sepulchre-entrance" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The entrance of the Church of the Holy Sepulchre, Jerusalem">
 <p class="music-story">This church stands on the site Christian tradition regards as the place of Jesus&rsquo; crucifixion, burial and resurrection, and is named for his empty tomb. Crusader rebuilding in the 12th century gave much of the church its Romanesque character, gathering Golgotha and the tomb under one roof; the present fabric dates largely from the rebuilding after the fire of 1808, completed 1810. Its chapels are shared under the long-standing Status Quo arrangement among the Greek Orthodox, Armenian and Roman Catholic churches — with Ethiopian Orthodox worship on its roof at Deir es-Sultan. Its chapters are the Passion and Resurrection chapters of all four Gospels: Matthew 27–28, Mark 15–16, Luke 23–24, John 19–20.</p>
 <p class="music-credit">Photograph by Berthold Werner &middot; <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_Holy_Sepulchre_BW_19.JPG">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="qumran-cave">
+<section class="art-card" id="qumran-cave" data-lat="31.7419" data-lon="35.4578" data-map="Qumran">
 <h3 class="music-title">The Scroll Cave — Qumran</h3>
 <p class="art-date">c. 150 BCE – 72/73 CE &middot; Judaean Desert</p>
 <img class="art-photo" data-place="qumran-cave" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The Qumran cave in whose cliffs the Dead Sea Scrolls were found">
 <p class="music-story">The settlement at Qumran, in the Judaean Desert above the Dead Sea, is associated with a community — usually identified with the Essenes — who lived there from about 150 BCE until 72/73 CE. In 1947 Bedouin shepherds found the first scrolls in the cave in this photograph; eleven caves eventually yielded the Dead Sea Scrolls, the oldest known biblical manuscripts. The caves also preserved fragments of books the Ethiopian canon never lost — Enoch traditions, including the Book of Giants, and Jubilees material, alongside the Temple Scroll and the great Isaiah Scroll. Enoch and Jubilees stand complete only in the 81-book canon.</p>
 <p class="music-credit">Photograph by Effi Schweizer, released by the photographer into the public domain &middot; <a href="https://commons.wikimedia.org/wiki/File:Qumran.jpeg">Wikimedia Commons</a> &middot; Public domain</p>
 </section>
-<section class="art-card" id="capernaum-synagogue">
+<section class="art-card" id="capernaum-synagogue" data-lat="32.8806" data-lon="35.5736" data-map="Capernaum">
 <h3 class="music-title">The Synagogue at Capernaum</h3>
 <p class="art-date">4th-century synagogue over a 1st-century one &middot; Sea of Galilee</p>
 <img class="art-photo" data-place="capernaum-synagogue" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Ruins of the white limestone synagogue at Capernaum">
 <p class="music-story">Capernaum was Jesus&rsquo; base in Galilee. The standing white limestone synagogue is fourth-century, built over the black-basalt synagogue of Jesus&rsquo; own day; the town&rsquo;s houses, the octagonal church over Peter&rsquo;s house, and the synagogue were excavated from the nineteenth century on. Matthew 4:12–13 (Jesus &ldquo;dwelt in Capernaum&rdquo;), Mark 1:21 (teaching in the synagogue on the Sabbath), Luke 7:2–5 (the centurion who &ldquo;built us a synagogue&rdquo;). An honest note stands on this card: the camera stands on a later building over the original site — the fourth-century synagogue over the first-century one, not Jesus&rsquo; own walls.</p>
 <p class="music-credit">Photograph by David Shankbone &middot; <a href="https://en.wikivoyage.org/wiki/File:Capernaum_synagogue_by_David_Shankbone.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="madaba-jerusalem-panel">
+<section class="art-card" id="madaba-jerusalem-panel" data-lat="31.71769" data-lon="35.79412" data-map="Madaba, Jordan">
 <h3 class="music-title">The Madaba Map — Jerusalem Panel</h3>
 <p class="art-date">6th-century mosaic &middot; Church of St. George, Madaba, Jordan</p>
 <img class="art-photo" data-place="madaba-jerusalem-panel" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Detail of the Madaba Map mosaic: 6th-century Jerusalem">
 <p class="music-story">The oldest surviving cartographic depiction of the Holy Land, a sixth-century floor mosaic in the Byzantine church of St. George at Madaba; about a quarter of the original survives, naming some 150 towns. This panel shows Jerusalem — Damascus Gate, St. Stephen&rsquo;s Gate, Golden Gate, Tower of David, Church of the Holy Sepulchre, Cardo Maximus. The map IS the geography of the canon in stone: Jerusalem, Bethlehem, Jericho, and the Jordan, drawn by Christians who still walked those roads, picturing the world of Joshua through the Gospels. An honest note: a detail panel of the map, not the whole fifteen-metre floor, and the church above it is modern, the mosaic Byzantine.</p>
 <p class="music-credit">Photograph by David Bjorgen &middot; <a href="https://en.wikivoyage.org/wiki/File:Madaba_Jerusalem_Mosaic.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="nazareth-annunciation">
+<section class="art-card" id="nazareth-annunciation" data-lat="32.70218" data-lon="35.29756" data-map="Nazareth">
 <h3 class="music-title">The Basilica of the Annunciation — Nazareth</h3>
 <p class="art-date">Consecrated 1969 &middot; Nazareth</p>
 <img class="art-photo" data-place="nazareth-annunciation" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The Basilica of the Annunciation, Nazareth">
 <p class="music-story">The present basilica (consecrated 1969, architect Giovanni Muzio) stands over the Grotto of the Annunciation, on the site of three earlier churches — Byzantine, Crusader, and later — at the south of the ancient Nazareth village, where excavations also found houses, wells, and granaries of the old village. Luke 1:26–38, the Annunciation to Mary in Nazareth; Matthew 2:23 and Luke 2:39–52, Jesus&rsquo; upbringing in Nazareth. An honest note: a modern basilica on an ancient holy site, not an ancient building itself.</p>
 <p class="music-credit">Photograph by David Shankbone &middot; <a href="https://en.wikivoyage.org/wiki/File:Church_of_the_Annunciation_2_by_David_Shankbone.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="mount-nebo-mosaics">
+<section class="art-card" id="mount-nebo-mosaics" data-lat="31.7679" data-lon="35.7256" data-map="Mount Nebo, Jordan">
 <h3 class="music-title">The Memorial Church of Moses — Mount Nebo</h3>
 <p class="art-date">Byzantine basilica under a modern memorial church &middot; Jordan</p>
 <img class="art-photo" data-place="mount-nebo-mosaics" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Floor mosaics of the Memorial Church of Moses on Mount Nebo">
 <p class="music-story">On the summit where Moses viewed the Promised Land, a small church visited by the pilgrim Egeria in the fourth century was rebuilt and enlarged in the fifth–sixth centuries with side chapels, baptistery, and rich mosaics; the modern Memorial Church of Moses (restored 2013) protects the Byzantine basilica. Deuteronomy 34:1–4 — Moses on Nebo viewing the land he would not enter — and Numbers 27, the succession to Joshua on the same ground. An honest note: a modern protective church over a Byzantine basilica over a traditional site, and Moses&rsquo; burial place itself is unknown (Deuteronomy 34:6) — the photo shows the memorial, not a grave.</p>
 <p class="music-credit">Photograph by David Bjorgen &middot; <a href="https://en.wikipedia.org/wiki/File:Mt_Nebo_Mosaic.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/2.5/">CC BY-SA 2.5</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="gethsemane-olive-trees">
+<section class="art-card" id="gethsemane-olive-trees" data-lat="31.7794" data-lon="35.2394" data-map="Jerusalem - Gethsemane">
 <h3 class="music-title">The Garden of Gethsemane — Ancient Olive Trees</h3>
 <p class="art-date">Jerusalem &middot; Mount of Olives</p>
 <img class="art-photo" data-place="gethsemane-olive-trees" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Ancient gnarled olive trees in the Garden of Gethsemane">
 <p class="music-story">"Gethsemane" means oil press. The garden at the foot of the Mount of Olives holds eight ancient olives, scientifically dated to around 900 years old but with rootstock possibly far older; a 1,500-year-old Byzantine church and a Second Temple mikveh were found at the site in 2020. The present Church of All Nations (1924) stands over a Byzantine church and a Crusader church, enshrining the Rock of Agony. Matthew 26:36–46; Mark 14:32–42; Luke 22:39–46 — Jesus' agony and arrest, the night before the Crucifixion. Honest note: the trees are ancient but are not proven to be the very trees of that night; the garden, not a building, is the keeper here.</p>
 <p class="music-credit">Photograph by Ian Scott &middot; <a href="https://commons.wikimedia.org/wiki/File:Olives_in_Gethsemane-4_(3856635164).jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="dominus-flevit">
+<section class="art-card" id="dominus-flevit" data-lat="31.7789" data-lon="35.2447" data-map="Jerusalem - Dominus Flevit">
 <h3 class="music-title">Dominus Flevit — The Lord Wept</h3>
 <p class="art-date">1953–55 &middot; Mount of Olives, Jerusalem</p>
 <img class="art-photo" data-place="dominus-flevit" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Exterior of the teardrop-shaped Dominus Flevit Church">
 <p class="music-story">Teardrop-shaped church (1953–55, Antonio Barluzzi) on a 5th-century Byzantine church site, over tombs back to c. 1600 BC; its west window frames Jerusalem, with the altar cross aligned on the Holy Sepulchre. Luke 19:41–44 — Jesus weeping over Jerusalem on the approach from the Mount of Olives; the prophecy of the city's fall, fulfilled AD 70. Honest note: a 1950s church on a Byzantine site marking a Crusader-or-later tradition; the weeping spot is traditional, not excavated fact.</p>
 <p class="music-credit">Photograph by Alon Alush &middot; <a href="https://commons.wikimedia.org/wiki/File:Dominus_Flevit_Church_-_exterior_view.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="hebron-machpelah">
+<section class="art-card" id="hebron-machpelah" data-lat="31.52371" data-lon="35.11057" data-map="Hebron">
 <h3 class="music-title">The Cave of the Patriarchs — Machpelah, from the South</h3>
 <p class="art-date">Herodian enclosure &middot; Hebron</p>
 <img class="art-photo" data-place="hebron-machpelah" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The Cave of the Patriarchs enclosure at Hebron, seen from the south">
@@ -187,42 +208,42 @@ painting.</p>
 </section>
 <h2>Wall Three — The Apostolic Churches</h2>
 <p>The churches of the apostolic age: a library in Paul&rsquo;s Ephesus, the cave of John&rsquo;s Revelation, the first house church ever found — and the cave church where disciples were first called Christians.</p>
-<section class="art-card" id="ephesus-library-of-celsus">
+<section class="art-card" id="ephesus-library-of-celsus" data-lat="37.9397" data-lon="27.3414" data-map="Ephesus, Turkey">
 <h3 class="music-title">The Library of Celsus — Ephesus</h3>
 <p class="art-date">c. 110–117 AD &middot; Ephesus, Türkiye</p>
 <img class="art-photo" data-place="ephesus-library-of-celsus" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The restored two-storey façade of the Library of Celsus, Ephesus">
 <p class="music-story">The Library of Celsus was built about 110–117 AD by the consul Tiberius Julius Aquila Polemaeanus as a memorial to his father, the former consul Tiberius Julius Celsus Polemaeanus; it held some 12,000 scrolls and was the third-largest library of the Roman Empire, after Alexandria and Pergamum. Its interior burned in 262 AD; the façade fell in an earthquake around 1000 AD and stood as rubble until German archaeologists completed its reconstruction in 1978. Paul lived and taught in this city (Acts 19), the Letter to the Ephesians bears its name, and Ephesus is the first of the seven churches addressed in Revelation (2:1–7).</p>
 <p class="music-credit">Photograph by Warren LeMay &middot; <a href="https://commons.wikimedia.org/wiki/File:Library_of_Celsus,_Ephesus_Archaeological_Site,_Selcuk,_Turkiye_(53527965893).jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="patmos-cave-of-the-apocalypse">
+<section class="art-card" id="patmos-cave-of-the-apocalypse" data-lat="37.31433" data-lon="26.54458" data-map="Patmos, Greece">
 <h3 class="music-title">Cave of the Apocalypse — Patmos</h3>
 <p class="art-date">Patmos, Greece &middot; the cave of Revelation 1:9</p>
 <img class="art-photo" data-place="patmos-cave-of-the-apocalypse" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The whitewashed entrance of the Cave of the Apocalypse, its mosaic of John dictating over the door">
 <p class="music-story">The cave on the road between Chora and Skala is reputed to be where John received and dictated the Book of Revelation; the mosaic over its door shows him dictating to his scribe Prochoros. Above it on the hill stands the Monastery of Saint John the Theologian, founded in 1088, around which the town of Chora grew; cave, monastery and town together were inscribed as a UNESCO World Heritage Site in 1999. Its chapter is Revelation&rsquo;s first: &ldquo;I John&hellip; was in the isle that is called Patmos, for the word of God, and for the testimony of Jesus Christ&rdquo; (Revelation 1:9).</p>
 <p class="music-credit">Photograph by Vladimir Boskovic &middot; <a href="https://commons.wikimedia.org/wiki/File:Cave_of_the_Apocalypse.jpg">Wikimedia Commons</a> &middot; Public domain</p>
 </section>
-<section class="art-card" id="dura-europos-good-shepherd">
+<section class="art-card" id="dura-europos-good-shepherd" data-lat="34.7486" data-lon="40.7286" data-map="Dura-Europos, Syria">
 <h3 class="music-title">The Good Shepherd — Dura-Europos</h3>
 <p class="art-date">c. 233–235 AD &middot; baptistry fresco, now at Yale</p>
 <img class="art-photo" data-place="dura-europos-good-shepherd" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The baptistry wall painting of the Good Shepherd, with Adam and Eve below">
 <p class="music-story">The Dura-Europos church is the earliest identified Christian house church: an ordinary house converted for worship about 233–235 AD, with one room made into a baptistry. When the city was besieged in 256 AD, defenders filled the buildings along the western wall with earth — a rampart that buried and preserved both this church and the neighbouring synagogue for some 1,700 years. The house does not stand to be visited; what survives is its baptistry&rsquo;s painting, removed after excavation and now kept at the Yale University Art Gallery — the Good Shepherd, with Adam and Eve below, among the earliest depictions of Jesus ever found. The fresco preaches the canon in paint: Genesis 3 below the Shepherd, Psalm 23 and John 10 in the Shepherd himself, over the very font where new believers were baptised.</p>
 <p class="music-credit">The ancient painter is unknown; photograph by Marsyas &middot; <a href="https://commons.wikimedia.org/wiki/File:Dura_Europos_Baptistry_Good_Shepherd.jpg">Wikimedia Commons</a> &middot; Public domain</p>
 </section>
-<section class="art-card" id="antioch-st-peter">
+<section class="art-card" id="antioch-st-peter" data-lat="36.2083" data-lon="36.1786" data-map="Antioch, Turkey">
 <h3 class="music-title">The Church of St. Peter — Antioch</h3>
 <p class="art-date">Cave church, Crusader façade, 1863 restoration &middot; Antakya, Türkiye</p>
 <img class="art-photo" data-place="antioch-st-peter" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Façade of the cave church of St. Peter in Antioch">
 <p class="music-story">A cave carved into Mount Starius (13 by 9.5 by 7 metres), where tradition says Peter preached and founded the Antioch church. The oldest surviving parts are fourth–fifth century (mosaic floor, fresco traces); Crusaders lengthened it and built the façade, and Capuchins restored it in 1863. Now a museum; worship by permit. Acts 11:26 — &ldquo;the disciples were called Christians first in Antioch&rdquo; — Acts 13:1–3, the Antioch church sending out Paul and Barnabas, and Galatians 2:11, Peter at Antioch. An honest note: cave plus Crusader façade plus nineteenth-century restoration — the &ldquo;oldest church&rdquo; claim is tradition, and the visible front is not first-century.</p>
 <p class="music-credit">Photograph by Volkan Hatem &middot; <a href="https://en.wikivoyage.org/wiki/File:Antioch_Saint_Pierre_Church_Front.JPG">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="philippi-mosaic">
+<section class="art-card" id="philippi-mosaic" data-lat="41.0108" data-lon="24.29273" data-map="Philippi, Greece">
 <h3 class="music-title">Philippi — Floor Mosaic Naming Paul</h3>
 <p class="art-date">Octagonal Basilica &middot; Philippi, Greece</p>
 <img class="art-photo" data-place="philippi-mosaic" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Floor mosaic of Philippi's Octagonal Church with the name of Paul in the third line">
 <p class="music-story">Philippi, Roman colony on the Via Egnatia, UNESCO 2016: forum, theatre, Basilicas A and B (c. 550), and the Octagonal Church built over the "Paul" basilica. The so-called Prison of Paul is a Roman cistern later turned into a shrine — tradition, not proven prison. Acts 16 — Lydia's baptism (the first in Europe), Paul and Silas imprisoned and freed, the Philippian jailer's conversion; the Letter to the Philippians. Honest note: the mosaic names Paul but is centuries later than Paul; the photo is a detail, not the whole basilica.</p>
 <p class="music-credit">Photograph by Berthold Werner &middot; <a href="https://commons.wikimedia.org/wiki/File:Archaeological_site_of_Philippi_BW_2017-10-05_12-54-40.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="malta-catacombs">
+<section class="art-card" id="malta-catacombs" data-lat="35.88043" data-lon="14.39757" data-map="Rabat, Malta">
 <h3 class="music-title">St. Paul's Catacombs — Rabat, Malta</h3>
 <p class="art-date">4th–8th centuries &middot; Rabat, Malta</p>
 <img class="art-photo" data-place="malta-catacombs" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Panorama of St. Paul's Catacombs at Rabat, Malta">
@@ -231,21 +252,21 @@ painting.</p>
 </section>
 <h2>Wall Four — The Imperial Churches</h2>
 <p>The great churches of the Christian empire: Justinian&rsquo;s Holy Wisdom, Ravenna&rsquo;s sanctuary of gold — and Rome&rsquo;s layered basilica, where the Cross grows as a tree.</p>
-<section class="art-card" id="hagia-sophia-istanbul">
+<section class="art-card" id="hagia-sophia-istanbul" data-lat="41.00803" data-lon="28.97834" data-map="Istanbul, Turkey">
 <h3 class="music-title">Hagia Sophia — Istanbul</h3>
 <p class="art-date">Built 532–537 &middot; Istanbul, Türkiye</p>
 <img class="art-photo" data-place="hagia-sophia-istanbul" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Hagia Sophia — dome, half-domes and minarets — seen from Sultanahmet Square">
 <p class="music-story">The present Hagia Sophia was built 532–537 on the orders of the Emperor Justinian I, designed by the Greek scientists Isidore of Miletus and Anthemius of Tralles — the third Church of the Holy Wisdom on the site. It was dedicated to the Logos, the Holy Wisdom of God, and its massive dome made it the world&rsquo;s largest cathedral for nearly a thousand years; it is considered the epitome of Byzantine architecture. It is named for <em>Sophia</em> — Holy Wisdom, the Wisdom of Proverbs 8 and of the Wisdom of Solomon, a book the Ethiopian canon keeps — and for a thousand years it was the great church of the Greek-reading Bible world.</p>
 <p class="music-credit">Photograph by Rraj89 &middot; <a href="https://commons.wikimedia.org/wiki/File:Hagia_Sofya,_Istanbul.jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="ravenna-san-vitale-apse-mosaic">
+<section class="art-card" id="ravenna-san-vitale-apse-mosaic" data-lat="44.42003" data-lon="12.19477" data-map="Ravenna, Italy">
 <h3 class="music-title">The Apse Mosaic — San Vitale, Ravenna</h3>
 <p class="art-date">Consecrated 547 &middot; Ravenna, Italy</p>
 <img class="art-photo" data-place="ravenna-san-vitale-apse-mosaic" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The apse mosaic of San Vitale: Christ enthroned between archangels, with St. Vitalis and Bishop Ecclesius">
 <p class="music-story">San Vitale was consecrated in 547 AD, and its sanctuary mosaics are among the supreme survivals of Byzantine art. In the apse, Christ sits enthroned between two archangels, with St. Vitalis and Bishop Ecclesius, who offers a model of the church; around the sanctuary stand the offering scenes of Abraham entertaining the angels and the Sacrifice of Isaac, the sacrifices of Abel and Melchizedek, and the famous court panels of the Emperor Justinian and the Empress Theodora. The walls read Genesis in gold: Abraham and Isaac (Genesis 18 and 22), Abel and Melchizedek (Genesis 4 and 14), framing the altar — the old sacrifices gathered around the Lamb.</p>
 <p class="music-credit">Photograph by Petar Milo&scaron;evi&cacute; &middot; <a href="https://commons.wikimedia.org/wiki/File:Apse_mosaic_-_Basilica_of_San_Vitale_(Ravenna).jpg">Wikimedia Commons</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> — shared here under the same license.</p>
 </section>
-<section class="art-card" id="rome-san-clemente-apse">
+<section class="art-card" id="rome-san-clemente-apse" data-lat="41.8894" data-lon="12.4975" data-map="Rome, Italy">
 <h3 class="music-title">The Apse Mosaic — San Clemente, Rome</h3>
 <p class="art-date">12th-century mosaic &middot; Rome</p>
 <img class="art-photo" data-place="rome-san-clemente-apse" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Apse mosaic of San Clemente, Rome: the Cross as the Tree of Life">
@@ -254,21 +275,21 @@ painting.</p>
 </section>
 <h2>Wall Five — The First Christian Nations</h2>
 <p>The nations that took the Gospel first and kept it: Armenia, the first state to adopt Christianity, and Georgia, converted in the fourth century — their great cathedrals, still standing.</p>
-<section class="art-card" id="etchmiadzin-cathedral">
+<section class="art-card" id="etchmiadzin-cathedral" data-lat="40.1575" data-lon="44.2939" data-map="Etchmiadzin, Armenia">
 <h3 class="music-title">Etchmiadzin Cathedral</h3>
 <p class="art-date">Core 483/4, dome and belfries 17th century &middot; Vagharshapat, Armenia</p>
 <img class="art-photo" data-place="etchmiadzin-cathedral" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Etchmiadzin Cathedral, mother church of the Armenian Apostolic Church">
 <p class="music-story">Mother church of the Armenian Apostolic Church. Tradition dates the original to 301–303 under Gregory the Illuminator after King Tiridates III adopted Christianity — Armenia the first state to do so. The core of the present building is 483/4, with a seventeenth-century dome and belfries and an 1868 sacristy; a UNESCO World Heritage Site since 2000. Its canon tie is the first Christian nation itself, built on the apostolic preaching tradition (Thaddeus and Bartholomew in Armenia), and Gregory&rsquo;s vision of the Only-Begotten descending — the Incarnation of John 1 — striking the ground with a golden hammer to mark the site. An honest note: a small file (800 by 600), usable as it stands.</p>
 <p class="music-credit">Photograph by Heretiq &middot; <a href="https://en.wikivoyage.org/wiki/File:Echmiadzin-cathedral.jpg">Wikimedia Commons</a> &middot; Public domain</p>
 </section>
-<section class="art-card" id="svetitskhoveli-from-jvari">
+<section class="art-card" id="svetitskhoveli-from-jvari" data-lat="41.84177" data-lon="44.72104" data-map="Mtskheta, Georgia">
 <h3 class="music-title">Svetitskhoveli Cathedral from Jvari</h3>
 <p class="art-date">Present building 1010–1029 &middot; Mtskheta, Georgia</p>
 <img class="art-photo" data-place="svetitskhoveli-from-jvari" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Svetitskhoveli Cathedral and Mtskheta seen from the Jvari monastery">
 <p class="music-story">Svetitskhoveli (&ldquo;Life-Giving Pillar&rdquo;) is Georgia&rsquo;s great cathedral, on the site of a fourth-century church; the present building is eleventh century (1010–1029). Tradition says Christ&rsquo;s robe, brought by a Mtskheta Jew from Jerusalem, is buried beneath it, and a cedar pillar miraculously rose over the spot. Jvari monastery above it is sixth–seventh century. The robe of Christ (John 19:23–24, the seamless robe cast lots for at the Cross) is Georgia&rsquo;s founding relic, and the church that guards it stands for the conversion of Georgia under St. Nino in the fourth century. An honest note: a distant view of the cathedral in its town, not a close architectural frame.</p>
 <p class="music-credit">Photograph by Kober &middot; <a href="https://commons.wikimedia.org/wiki/File:View_of_Svetitskhoveli_from_Jvari.jpg">Wikimedia Commons</a> &middot; Public domain</p>
 </section>
-<section class="art-card" id="hanging-church">
+<section class="art-card" id="hanging-church" data-lat="30.00501" data-lon="31.22988" data-map="Old Cairo, Egypt">
 <h3 class="music-title">The Hanging Church — Old Cairo</h3>
 <p class="art-date">5th–7th century, restored 9th–10th &middot; Old Cairo, Egypt</p>
 <img class="art-photo" data-place="hanging-church" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="The Hanging Church in Old Cairo">
@@ -331,6 +352,50 @@ stands. What could not be verified as freely given was not hung.</p>
 <p>© Cory Brent</p>
 <p class="translator-line">We did our best with every word.</p>
 </footer>
+
+<!-- MAP SCRIPT: reads every section.art-card's data-lat / data-lon / data-map
+     and draws one pin per distinct site. No separate data file to keep in step:
+     add a card with its three attributes and the pin appears on its own. -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var box = document.getElementById('places-map');
+  if (!box || typeof L === 'undefined') return;
+  var cards = document.querySelectorAll('section.art-card[data-lat][data-lon]');
+  var groups = {};
+  var order = [];
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  for (var i = 0; i < cards.length; i++) {
+    var c = cards[i];
+    var lat = parseFloat(c.getAttribute('data-lat'));
+    var lon = parseFloat(c.getAttribute('data-lon'));
+    if (isNaN(lat) || isNaN(lon)) continue;
+    var key = lat.toFixed(4) + ',' + lon.toFixed(4);
+    if (!groups[key]) { groups[key] = { lat: lat, lon: lon, label: c.getAttribute('data-map') || '', links: [] }; order.push(key); }
+    var h = c.querySelector('h3');
+    groups[key].links.push({ id: c.id, title: h ? h.textContent : c.id });
+  }
+  if (!order.length) return;
+  box.innerHTML = '';
+  var map = L.map(box, { scrollWheelZoom: false });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+  var bounds = [];
+  for (var j = 0; j < order.length; j++) {
+    var g = groups[order[j]];
+    var html = '<strong>' + esc(g.label) + '</strong>';
+    for (var k = 0; k < g.links.length; k++) {
+      html += '<br><a href="#' + esc(g.links[k].id) + '">' + esc(g.links[k].title) + '</a>';
+    }
+    L.marker([g.lat, g.lon]).addTo(map).bindPopup(html);
+    bounds.push([g.lat, g.lon]);
+  }
+  map.on('popupopen', function (e) {
+    var links = e.popup.getElement().querySelectorAll('a');
+    for (var m = 0; m < links.length; m++) { links[m].addEventListener('click', function () { map.closePopup(); }); }
+  });
+  map.fitBounds(bounds, { padding: [30, 30] });
+})();
+</script>
 <script data-goatcounter="https://murkafool.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
