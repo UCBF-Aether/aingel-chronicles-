@@ -67,6 +67,8 @@ function fmtTime(iso) {
 }
 function load() {
   fetch(PROXY + '/api/stats').then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); }).then(function (d) {
+    // Mhel's pages report to this same account — keep them off the public ranking.
+    d.pages = d.pages.filter(function (pg) { return (pg.path || '').toLowerCase().indexOf('feel-great-with-mhel') === -1; });
     document.getElementById('stat-total').textContent = d.total_visitors;
     document.getElementById('stat-status').textContent = 'Updated ' + fmtTime(d.updated) + ' · refreshed every minute';
     var list = document.getElementById('rank-list');
